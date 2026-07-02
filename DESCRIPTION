@@ -1,0 +1,25 @@
+Package: cleanplots
+Title: 'cleanplots' Color Scales and Theme for 'ggplot2'
+Version: 0.1.0
+Authors@R:
+    person("Trenton D.", "Mize", email = "tmize@purdue.edu",
+           role = c("aut", "cre"))
+Description: Color scales and a theme for 'ggplot2' implementing the
+    'cleanplots' graphing scheme by Trenton D. Mize, originally developed
+    for Stata <https://www.trentonmize.com/software/cleanplots>. Designed
+    for clean, publication-ready default plots of predictions and marginal
+    effects. Provides discrete color and fill scales with the main and
+    bar/area versions of the palette, and a theme matching the scheme's
+    layout defaults.
+License: MIT + file LICENSE
+URL: https://github.com/tdmize/cleanplots, https://www.trentonmize.com/software/cleanplots
+BugReports: https://github.com/tdmize/cleanplots/issues
+Encoding: UTF-8
+Imports:
+    ggplot2,
+    utils
+Suggests:
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.1

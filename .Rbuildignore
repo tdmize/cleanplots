@@ -1,0 +1,7 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^LICENSE\.md$
+^\.github$
+^preview\.png$
+^data-raw$
+^cran-comments\.md$
