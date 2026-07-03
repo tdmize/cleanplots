@@ -4,17 +4,18 @@
 \alias{theme_cleanplots}
 \title{cleanplots theme for ggplot2}
 \usage{
-theme_cleanplots(base_size = 13, base_family = "", legend_position = "right")
+theme_cleanplots(base_size = 12, base_family = "", legend_position = "right")
 }
 \arguments{
-\item{base_size}{Base font size in points (default: \code{13}).}
+\item{base_size}{Base font size in points (default: \code{12}, sized to
+match the body text of an academic article when the figure is saved
+at 7 x 5 inches; see \code{\link[=cleanplots_save]{cleanplots_save()}}).}
 
 \item{base_family}{Base font family (default: \code{""}).}
 
 \item{legend_position}{Position of the legend (default: \code{"right"},
-bottom-justified, matching the Stata scheme's 4-o'clock position).
-Set to \code{"none"} to remove, or any value accepted by
-\code{ggplot2::theme(legend.position = ...)}.}
+vertically centered). Set to \code{"none"} to remove, or any value
+accepted by \code{ggplot2::theme(legend.position = ...)}.}
 }
 \value{
 A ggplot2 theme object.
@@ -35,8 +36,8 @@ Correspondence to the Stata scheme file:
 (\verb{draw_major_hgrid yes}, \verb{draw_major_vgrid yes},
 \verb{linepattern major_grid dot}, \verb{color major_grid gs10})
 \item No minor gridlines
-\item Legend at lower right, single column, no frame, no title
-(\verb{clockdir legend_position 4}, \verb{numstyle legend_cols 1},
+\item Legend at the right, single column, no frame, no title
+(\verb{clockdir legend_position 3}, \verb{numstyle legend_cols 1},
 \verb{linestyle legend none})
 \item Horizontal y-axis tick labels (\verb{anglestyle vertical_tick horizontal})
 \item Facet strips: black-outlined, unfilled boxes with bold labels

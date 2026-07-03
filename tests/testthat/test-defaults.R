@@ -12,6 +12,7 @@ test_that("cleanplots_defaults sets theme, geoms, and scale options", {
   expect_equal(pt$size, 2)
   expect_equal(pt$stroke, 0.7)
   expect_equal(ggplot2::GeomLine$default_aes$linewidth, 0.75)
+  expect_equal(ggplot2::GeomDensity$default_aes$linewidth, 0.75)
   sm <- ggplot2::GeomSmooth$default_aes
   expect_equal(sm$linewidth, 0.75)
   expect_equal(unclass(sm$colour)[[1]], "#D50000")
@@ -28,7 +29,7 @@ test_that("cleanplots_defaults sets theme, geoms, and scale options", {
   ggplot2::theme_set(old_theme)
   options(old_opts)
   ggplot2::update_geom_defaults("point", list(size = 1.5, stroke = 0.5))
-  for (g in c("line", "path", "step"))
+  for (g in c("line", "path", "step", "density", "function"))
     ggplot2::update_geom_defaults(g, list(linewidth = 0.5))
   ggplot2::update_geom_defaults("smooth",
     list(linewidth = 1, colour = "#3366FF"))

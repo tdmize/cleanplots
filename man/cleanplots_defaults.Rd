@@ -5,7 +5,7 @@
 \title{Set cleanplots defaults for the session}
 \usage{
 cleanplots_defaults(
-  base_size = 13,
+  base_size = 12,
   point_size = 2,
   point_stroke = 0.7,
   line_width = 0.75,
@@ -14,7 +14,7 @@ cleanplots_defaults(
 }
 \arguments{
 \item{base_size}{Base font size in points passed to
-\code{\link[=theme_cleanplots]{theme_cleanplots()}} (default: \code{13}).}
+\code{\link[=theme_cleanplots]{theme_cleanplots()}} (default: \code{12}).}
 
 \item{point_size}{Default size for \code{geom_point()} markers
 (default: \code{2}; ggplot2's own default is 1.5).}
@@ -24,9 +24,11 @@ controls how visible the hollow shapes are (default: \code{0.7};
 ggplot2's own default is 0.5).}
 
 \item{line_width}{Default line width for \code{geom_line()}, \code{geom_path()},
-\code{geom_step()}, and \code{geom_smooth()} (default: \code{0.75}; ggplot2's own
-default is 0.5). Error bars, line ranges, and point ranges are set
-to 80\% of this value.}
+\code{geom_step()}, \code{geom_density()}, \code{geom_function()}, and
+\code{geom_smooth()} (default: \code{0.75}; ggplot2's own default is 0.5).
+Error bars, line ranges, and point ranges are set to 80\% of this
+value. Reference lines (\code{geom_hline()}, \code{geom_vline()},
+\code{geom_abline()}) are deliberately left thin and unobtrusive.}
 
 \item{smooth_color}{Default line color for \code{geom_smooth()}
 (default: cleanplots red, \code{"#D50000"}).}

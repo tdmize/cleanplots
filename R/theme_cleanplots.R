@@ -14,20 +14,21 @@
 #'     (`draw_major_hgrid yes`, `draw_major_vgrid yes`,
 #'     `linepattern major_grid dot`, `color major_grid gs10`)
 #'   \item No minor gridlines
-#'   \item Legend at lower right, single column, no frame, no title
-#'     (`clockdir legend_position 4`, `numstyle legend_cols 1`,
+#'   \item Legend at the right, single column, no frame, no title
+#'     (`clockdir legend_position 3`, `numstyle legend_cols 1`,
 #'     `linestyle legend none`)
 #'   \item Horizontal y-axis tick labels (`anglestyle vertical_tick
 #'     horizontal`)
 #'   \item Facet strips: black-outlined, unfilled boxes with bold labels
 #' }
 #'
-#' @param base_size Base font size in points (default: `13`).
+#' @param base_size Base font size in points (default: `12`, sized to
+#'   match the body text of an academic article when the figure is saved
+#'   at 7 x 5 inches; see [cleanplots_save()]).
 #' @param base_family Base font family (default: `""`).
 #' @param legend_position Position of the legend (default: `"right"`,
-#'   bottom-justified, matching the Stata scheme's 4-o'clock position).
-#'   Set to `"none"` to remove, or any value accepted by
-#'   `ggplot2::theme(legend.position = ...)`.
+#'   vertically centered). Set to `"none"` to remove, or any value
+#'   accepted by `ggplot2::theme(legend.position = ...)`.
 #'
 #' @return A ggplot2 theme object.
 #'
@@ -39,7 +40,7 @@
 #'   theme_cleanplots() +
 #'   scale_color_cleanplots()
 #' @export
-theme_cleanplots <- function(base_size = 13, base_family = "",
+theme_cleanplots <- function(base_size = 12, base_family = "",
                              legend_position = "right") {
   gs10 <- "#A0A0A0" # Stata gs10, used for axis lines, ticks, and gridlines
 
@@ -67,9 +68,8 @@ theme_cleanplots <- function(base_size = 13, base_family = "",
       ),
       axis.title = ggplot2::element_text(size = ggplot2::rel(0.95)),
 
-      # Legend: lower right, no frame, no title (Stata legends are untitled)
+      # Legend: right, centered, no frame, no title
       legend.position = legend_position,
-      legend.justification = "bottom",
       legend.title = ggplot2::element_blank(),
       legend.background = ggplot2::element_blank(),
       legend.key = ggplot2::element_blank(),

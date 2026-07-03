@@ -2,6 +2,7 @@
 
 export(cleanplots_colors)
 export(cleanplots_defaults)
+export(cleanplots_save)
 export(palette_cleanplots)
 export(scale_color_cleanplots)
 export(scale_colour_cleanplots)

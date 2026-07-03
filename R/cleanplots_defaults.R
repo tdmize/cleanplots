@@ -29,16 +29,18 @@
 #' = NULL, ggplot2.discrete.fill = NULL)`.
 #'
 #' @param base_size Base font size in points passed to
-#'   [theme_cleanplots()] (default: `13`).
+#'   [theme_cleanplots()] (default: `12`).
 #' @param point_size Default size for `geom_point()` markers
 #'   (default: `2`; ggplot2's own default is 1.5).
 #' @param point_stroke Default outline thickness for markers, which
 #'   controls how visible the hollow shapes are (default: `0.7`;
 #'   ggplot2's own default is 0.5).
 #' @param line_width Default line width for `geom_line()`, `geom_path()`,
-#'   `geom_step()`, and `geom_smooth()` (default: `0.75`; ggplot2's own
-#'   default is 0.5). Error bars, line ranges, and point ranges are set
-#'   to 80% of this value.
+#'   `geom_step()`, `geom_density()`, `geom_function()`, and
+#'   `geom_smooth()` (default: `0.75`; ggplot2's own default is 0.5).
+#'   Error bars, line ranges, and point ranges are set to 80% of this
+#'   value. Reference lines (`geom_hline()`, `geom_vline()`,
+#'   `geom_abline()`) are deliberately left thin and unobtrusive.
 #' @param smooth_color Default line color for `geom_smooth()`
 #'   (default: cleanplots red, `"#D50000"`).
 #'
@@ -52,7 +54,7 @@
 #' ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) +
 #'   geom_point()
 #' @export
-cleanplots_defaults <- function(base_size = 13, point_size = 2,
+cleanplots_defaults <- function(base_size = 12, point_size = 2,
                                 point_stroke = 0.7, line_width = 0.75,
                                 smooth_color = "#D50000") {
   # Default theme
@@ -62,7 +64,7 @@ cleanplots_defaults <- function(base_size = 13, point_size = 2,
   ggplot2::update_geom_defaults(
     "point", list(size = point_size, stroke = point_stroke)
   )
-  for (g in c("line", "path", "step")) {
+  for (g in c("line", "path", "step", "density", "function")) {
     ggplot2::update_geom_defaults(g, list(linewidth = line_width))
   }
   ggplot2::update_geom_defaults(
