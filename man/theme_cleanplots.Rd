@@ -4,10 +4,10 @@
 \alias{theme_cleanplots}
 \title{cleanplots theme for ggplot2}
 \usage{
-theme_cleanplots(base_size = 12, base_family = "", legend_position = "right")
+theme_cleanplots(base_size = 13, base_family = "", legend_position = "right")
 }
 \arguments{
-\item{base_size}{Base font size in points (default: \code{12}).}
+\item{base_size}{Base font size in points (default: \code{13}).}
 
 \item{base_family}{Base font family (default: \code{""}).}
 
@@ -39,6 +39,7 @@ Correspondence to the Stata scheme file:
 (\verb{clockdir legend_position 4}, \verb{numstyle legend_cols 1},
 \verb{linestyle legend none})
 \item Horizontal y-axis tick labels (\verb{anglestyle vertical_tick horizontal})
+\item Facet strips: black-outlined, unfilled boxes with bold labels
 }
 }
 \examples{

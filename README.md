@@ -19,6 +19,23 @@ remotes::install_github("tdmize/cleanplots")
 
 ## Usage
 
+The quickest way to use cleanplots is one setup call, which mirrors how
+the Stata scheme works: it sets the theme, makes markers and lines
+larger and thicker, and applies the cleanplots colors to all plots by
+default (main palette for `color`, softer bar palette for `fill`):
+
+```r
+library(ggplot2)
+library(cleanplots)
+cleanplots_defaults()
+
+ggplot(mpg, aes(displ, hwy, color = class, shape = class)) +
+  geom_point() +
+  scale_shape_cleanplots()
+```
+
+Or apply the pieces individually per plot:
+
 ```r
 library(ggplot2)
 library(cleanplots)

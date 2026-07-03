@@ -19,9 +19,10 @@
 #'     `linestyle legend none`)
 #'   \item Horizontal y-axis tick labels (`anglestyle vertical_tick
 #'     horizontal`)
+#'   \item Facet strips: black-outlined, unfilled boxes with bold labels
 #' }
 #'
-#' @param base_size Base font size in points (default: `12`).
+#' @param base_size Base font size in points (default: `13`).
 #' @param base_family Base font family (default: `""`).
 #' @param legend_position Position of the legend (default: `"right"`,
 #'   bottom-justified, matching the Stata scheme's 4-o'clock position).
@@ -38,7 +39,7 @@
 #'   theme_cleanplots() +
 #'   scale_color_cleanplots()
 #' @export
-theme_cleanplots <- function(base_size = 12, base_family = "",
+theme_cleanplots <- function(base_size = 13, base_family = "",
                              legend_position = "right") {
   gs10 <- "#A0A0A0" # Stata gs10, used for axis lines, ticks, and gridlines
 
@@ -71,6 +72,14 @@ theme_cleanplots <- function(base_size = 12, base_family = "",
       legend.justification = "bottom",
       legend.title = ggplot2::element_blank(),
       legend.background = ggplot2::element_blank(),
-      legend.key = ggplot2::element_blank()
+      legend.key = ggplot2::element_blank(),
+
+      # Facet strips: black outline, no fill, bold labels
+      strip.background = ggplot2::element_rect(
+        fill = NA, color = "black", linewidth = 0.4
+      ),
+      strip.text = ggplot2::element_text(
+        face = "bold", size = ggplot2::rel(0.95)
+      )
     )
 }
