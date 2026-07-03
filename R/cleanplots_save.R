@@ -37,7 +37,7 @@
 #' f <- tempfile(fileext = ".png")
 #' cleanplots_save(f, p)
 #'
-#' # Override any default as needed, e.g. for lecture slides:
+#' # Override any default as needed, e.g. for presentations and lectures:
 #' cleanplots_save(f, p, width = 10, height = 5.6)
 #' @export
 cleanplots_save <- function(filename, plot = ggplot2::last_plot(),
