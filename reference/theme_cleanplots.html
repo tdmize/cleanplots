@@ -13,7 +13,7 @@ vertical gridlines, and a frameless legend in the lower right."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">cleanplots</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,7 +49,7 @@ vertical gridlines, and a frameless legend in the lower right.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">theme_cleanplots</span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">13</span>, base_family <span class="op">=</span> <span class="st">""</span>, legend_position <span class="op">=</span> <span class="st">"right"</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">theme_cleanplots</span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">12</span>, base_family <span class="op">=</span> <span class="st">""</span>, legend_position <span class="op">=</span> <span class="st">"right"</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -57,7 +57,9 @@ vertical gridlines, and a frameless legend in the lower right.</p>
 
 
 <dl><dt id="arg-base-size">base_size<a class="anchor" aria-label="anchor" href="#arg-base-size"></a></dt>
-<dd><p>Base font size in points (default: <code>13</code>).</p></dd>
+<dd><p>Base font size in points (default: <code>12</code>, sized to
+match the body text of an academic article when the figure is saved
+at 7 x 5 inches; see <code><a href="cleanplots_save.html">cleanplots_save()</a></code>).</p></dd>
 
 
 <dt id="arg-base-family">base_family<a class="anchor" aria-label="anchor" href="#arg-base-family"></a></dt>
@@ -66,9 +68,8 @@ vertical gridlines, and a frameless legend in the lower right.</p>
 
 <dt id="arg-legend-position">legend_position<a class="anchor" aria-label="anchor" href="#arg-legend-position"></a></dt>
 <dd><p>Position of the legend (default: <code>"right"</code>,
-bottom-justified, matching the Stata scheme's 4-o'clock position).
-Set to <code>"none"</code> to remove, or any value accepted by
-<code>ggplot2::theme(legend.position = ...)</code>.</p></dd>
+vertically centered). Set to <code>"none"</code> to remove, or any value
+accepted by <code>ggplot2::theme(legend.position = ...)</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -84,8 +85,8 @@ Set to <code>"none"</code> to remove, or any value accepted by
 (<code>draw_major_hgrid yes</code>, <code>draw_major_vgrid yes</code>,
 <code>linepattern major_grid dot</code>, <code>color major_grid gs10</code>)</p></li>
 <li><p>No minor gridlines</p></li>
-<li><p>Legend at lower right, single column, no frame, no title
-(<code>clockdir legend_position 4</code>, <code>numstyle legend_cols 1</code>,
+<li><p>Legend at the right, single column, no frame, no title
+(<code>clockdir legend_position 3</code>, <code>numstyle legend_cols 1</code>,
 <code>linestyle legend none</code>)</p></li>
 <li><p>Horizontal y-axis tick labels (<code>anglestyle vertical_tick horizontal</code>)</p></li>
 <li><p>Facet strips: black-outlined, unfilled boxes with bold labels</p></li>

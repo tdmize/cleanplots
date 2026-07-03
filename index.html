@@ -11,8 +11,8 @@
 <script src="deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="cleanplots color scales and theme for ggplot2">
-<meta name="description" content="Color scales and a theme for ggplot2 implementing the cleanplots graphing scheme by Trenton D. Mize, originally developed for Stata &lt;https://www.trentonmize.com/software/cleanplots&gt;. Designed for clean, publication-ready default plots of predictions and marginal effects. Provides discrete color and fill scales with the main and bar/area versions of the palette, and a theme matching the scheme's layout defaults.">
-<meta property="og:description" content="Color scales and a theme for ggplot2 implementing the cleanplots graphing scheme by Trenton D. Mize, originally developed for Stata &lt;https://www.trentonmize.com/software/cleanplots&gt;. Designed for clean, publication-ready default plots of predictions and marginal effects. Provides discrete color and fill scales with the main and bar/area versions of the palette, and a theme matching the scheme's layout defaults.">
+<meta name="description" content="Color scales, shape and linetype scales, a theme, and saving defaults for ggplot2 implementing the cleanplots graphing scheme by Trenton D. Mize. Designed for clean, publication-ready figures with strong data visualization and accessibility defaults: colors are chosen to be colorblind-friendly and to remain distinguishable when printed in black and white, with matching marker shapes and line patterns that keep groups distinct across multiple visual channels. A companion scheme for Stata is available at &lt;https://www.trentonmize.com/software/cleanplots&gt;.">
+<meta property="og:description" content="Color scales, shape and linetype scales, a theme, and saving defaults for ggplot2 implementing the cleanplots graphing scheme by Trenton D. Mize. Designed for clean, publication-ready figures with strong data visualization and accessibility defaults: colors are chosen to be colorblind-friendly and to remain distinguishable when printed in black and white, with matching marker shapes and line patterns that keep groups distinct across multiple visual channels. A companion scheme for Stata is available at &lt;https://www.trentonmize.com/software/cleanplots&gt;.">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">cleanplots</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,7 +53,7 @@
 <!-- badges: start -->
 
 <p>Full documentation: <a href="https://tdmize.github.io/cleanplots/">tdmize.github.io/cleanplots</a></p>
-<p>Color scales and a theme for <strong>ggplot2</strong> implementing the <a href="https://www.trentonmize.com/software/cleanplots" class="external-link">cleanplots</a> graphing scheme by Trenton D. Mize, originally developed for Stata. The scheme is designed for clean, publication-ready default plots — particularly plots of predictions and marginal effects.</p>
+<p>Publication-ready defaults for <strong>ggplot2</strong>: the <a href="https://www.trentonmize.com/software/cleanplots" class="external-link">cleanplots</a> graphing scheme by Trenton D. Mize. cleanplots provides professional-looking figures with strong data visualization and accessibility defaults – colors are chosen to be <strong>colorblind-friendly</strong> and to remain <strong>distinguishable when printed in black &amp; white</strong>, with matching marker shapes and line patterns so that groups stay distinct across multiple visual channels. A companion scheme is available for Stata, so figures made in R and Stata share the same design.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -64,7 +64,7 @@
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h2>
-<p>The quickest way to use cleanplots is one setup call, which mirrors how the Stata scheme works: it sets the theme, makes markers and lines larger and thicker, and applies the cleanplots colors to all plots by default (main palette for <code>color</code>, softer bar palette for <code>fill</code>):</p>
+<p>The quickest way to use cleanplots is one setup call: it sets the theme, makes markers and lines larger and more visible, and applies the cleanplots colors to all plots by default (main palette for <code>color</code>, softer bar palette for <code>fill</code>):</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tdmize.github.io/cleanplots/">cleanplots</a></span><span class="op">)</span></span>
@@ -72,7 +72,9 @@
 <span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">displ</span>, <span class="va">hwy</span>, color <span class="op">=</span> <span class="va">class</span>, shape <span class="op">=</span> <span class="va">class</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="reference/scale_shape_cleanplots.html">scale_shape_cleanplots</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="reference/scale_shape_cleanplots.html">scale_shape_cleanplots</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="reference/cleanplots_save.html">cleanplots_save</a></span><span class="op">(</span><span class="st">"my-figure.png"</span><span class="op">)</span>   <span class="co"># saves at a fixed 7 x 5 in, 300 dpi</span></span></code></pre></div>
 <p>Or apply the pieces individually per plot:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
@@ -85,7 +87,7 @@
 <span>  <span class="fu"><a href="reference/scale_color_cleanplots.html">scale_color_cleanplots</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Bar charts use the softer bar/area palette</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">class</span>, fill <span class="op">=</span> <span class="va">drv</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">drv</span>, fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_bar</a></span><span class="op">(</span>position <span class="op">=</span> <span class="st">"dodge"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="reference/theme_cleanplots.html">theme_cleanplots</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="reference/scale_color_cleanplots.html">scale_fill_cleanplots</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"bars"</span><span class="op">)</span></span>
@@ -103,13 +105,13 @@
 <div class="section level2">
 <h2 id="the-palettes">The palettes<a class="anchor" aria-label="anchor" href="#the-palettes"></a>
 </h2>
-<p><strong>Main colors</strong> (<code>palette = "default"</code>) — used for markers, lines, and confidence intervals in the Stata scheme:</p>
+<p><strong>Main colors</strong> (<code>palette = "default"</code>) – used for markers, lines, and confidence intervals:</p>
 <table class="table">
 <thead><tr>
 <th>#</th>
 <th>Name</th>
 <th>Hex</th>
-<th>Stata definition</th>
+<th>Definition</th>
 </tr></thead>
 <tbody>
 <tr>
@@ -174,13 +176,13 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Bar/area colors</strong> (<code>palette = "bars"</code>) — the softer versions the Stata scheme uses for bar charts, area plots, and pie charts, as rendered with the scheme’s default <code>intensity bar 70</code> (30% fade toward white):</p>
+<p><strong>Bar/area colors</strong> (<code>palette = "bars"</code>) – softer versions used for bar charts, area plots, and pie charts, which use far more ink than points and lines:</p>
 <table class="table">
 <thead><tr>
 <th>#</th>
 <th>Name</th>
 <th>Hex</th>
-<th>Stata definition</th>
+<th>Definition</th>
 </tr></thead>
 <tbody>
 <tr>
@@ -257,42 +259,32 @@
 </table>
 </div>
 <div class="section level2">
-<h2 id="the-theme">The theme<a class="anchor" aria-label="anchor" href="#the-theme"></a>
-</h2>
-<p><code><a href="reference/theme_cleanplots.html">theme_cleanplots()</a></code> replicates the non-color settings of the Stata scheme: white background, no plot-region border, light gray axis lines and ticks, dotted light gray gridlines in both directions, and a frameless, untitled legend at the lower right. To restore a legend title:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/theme_cleanplots.html">theme_cleanplots</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level2">
 <h2 id="shapes-and-line-patterns">Shapes and line patterns<a class="anchor" aria-label="anchor" href="#shapes-and-line-patterns"></a>
 </h2>
-<p>The Stata scheme also sets default marker symbols and line patterns, which make series distinguishable in black &amp; white and under colorblindness. Use <code><a href="reference/scale_shape_cleanplots.html">scale_shape_cleanplots()</a></code> and <code><a href="reference/scale_shape_cleanplots.html">scale_linetype_cleanplots()</a></code> to get the same behavior in ggplot2:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Markers: hollow shapes for dark colors, solid for light colors</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">Sepal.Length</span>, <span class="va">Sepal.Width</span>,</span>
-<span>                 color <span class="op">=</span> <span class="va">Species</span>, shape <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<p>Color alone reliably distinguishes about 4-5 groups. Beyond that – and for black &amp; white printing and colorblind readers – cleanplots varies several visual channels at once: <code><a href="reference/scale_shape_cleanplots.html">scale_shape_cleanplots()</a></code> assigns hollow marker shapes to the dark colors and solid shapes to the light colors, and <code><a href="reference/scale_shape_cleanplots.html">scale_linetype_cleanplots()</a></code> assigns line patterns (solid, solid, dashed, dashed, shortdash, shortdash, longdash, longdash) so that any two groups sharing a shape or pattern always differ strongly in lightness. Groups remain distinguishable by color, by lightness, by marker shape and fill, and by line pattern.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">displ</span>, <span class="va">hwy</span>, color <span class="op">=</span> <span class="va">class</span>, shape <span class="op">=</span> <span class="va">class</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="reference/theme_cleanplots.html">theme_cleanplots</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="reference/scale_color_cleanplots.html">scale_color_cleanplots</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="reference/scale_shape_cleanplots.html">scale_shape_cleanplots</a></span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Line patterns: solid, solid, dashed, dashed, shortdash, shortdash,</span></span>
-<span><span class="co"># longdash, longdash -- same-pattern series always differ in lightness</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, color <span class="op">=</span> <span class="va">group</span>, linetype <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="reference/theme_cleanplots.html">theme_cleanplots</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="reference/scale_color_cleanplots.html">scale_color_cleanplots</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="reference/scale_shape_cleanplots.html">scale_linetype_cleanplots</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="reference/scale_shape_cleanplots.html">scale_shape_cleanplots</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="design-goals">Design goals<a class="anchor" aria-label="anchor" href="#design-goals"></a>
 </h2>
-<p>The palette alternates dark and light colors so the first several series are distinguishable by lightness alone when printed in black &amp; white, contains no red-green pair, and passes deuteranopia, protanopia, and tritanopia simulation checks for the first five colors (minimum Delta-E of about 21). Beyond 4-5 series, add <code><a href="reference/scale_shape_cleanplots.html">scale_shape_cleanplots()</a></code> (points) or <code><a href="reference/scale_shape_cleanplots.html">scale_linetype_cleanplots()</a></code> (lines): shapes and patterns are assigned so that any two series sharing a shape or pattern always differ strongly in lightness. Check the palette yourself at <a href="https://davidmathlogic.com/colorblind/#%23D50000-%238FC6EB-%23000000-%23909090-%23740074-%23FFB3D9-%23143755-%23C0C0C0-%23404040-%23D9D7F0" class="external-link">Coloring for Colorblindness</a>.</p>
+<p>The palette alternates dark and light colors so the first several groups are distinguishable by lightness alone when printed in black &amp; white, contains no red-green pair, and passes deuteranopia, protanopia, and tritanopia simulation checks for the first five colors (minimum Delta-E of about 21). Check the palette yourself at <a href="https://davidmathlogic.com/colorblind/#%23D50000-%238FC6EB-%23000000-%23909090-%23740074-%23FFB3D9-%23143755-%23C0C0C0-%23404040-%23D9D7F0" class="external-link">Coloring for Colorblindness</a>.</p>
 </div>
 <div class="section level2">
-<h2 id="stata-version">Stata version<a class="anchor" aria-label="anchor" href="#stata-version"></a>
+<h2 id="the-theme">The theme<a class="anchor" aria-label="anchor" href="#the-theme"></a>
 </h2>
-<p>The original Stata scheme is available at <a href="https://www.trentonmize.com/software/cleanplots" class="external-link uri">https://www.trentonmize.com/software/cleanplots</a> or via <code>net install cleanplots, from("https://tdmize.github.io/data/cleanplots") replace</code>.</p>
+<p><code><a href="reference/theme_cleanplots.html">theme_cleanplots()</a></code>: white background, no plot border, light gray axis lines and ticks, dotted light gray gridlines, a frameless, untitled legend at the right, and black-outlined facet strips with bold labels. To restore a legend title:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/theme_cleanplots.html">theme_cleanplots</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="cleanplots-for-stata">cleanplots for Stata<a class="anchor" aria-label="anchor" href="#cleanplots-for-stata"></a>
+</h2>
+<p>The original Stata scheme is available at <a href="https://www.trentonmize.com/software/cleanplots" class="external-link uri">https://www.trentonmize.com/software/cleanplots</a> or via <code>net install cleanplots, from("https://tdmize.github.io/data/cleanplots") replace</code>. Colors, marker symbols, line patterns, and layout match this package, so figures made in R and Stata look like siblings.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">

@@ -7,6 +7,13 @@ One call to apply the complete cleanplots scheme to a session
 - [`cleanplots_defaults()`](https://tdmize.github.io/cleanplots/reference/cleanplots_defaults.md)
   : Set cleanplots defaults for the session
 
+## Saving figures
+
+Save at a consistent, publication-ready size
+
+- [`cleanplots_save()`](https://tdmize.github.io/cleanplots/reference/cleanplots_save.md)
+  : Save a plot at cleanplots' recommended size
+
 ## Colors
 
 Color and fill scales, and the palette itself

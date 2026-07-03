@@ -8,14 +8,16 @@ vertical gridlines, and a frameless legend in the lower right.
 ## Usage
 
 ``` r
-theme_cleanplots(base_size = 13, base_family = "", legend_position = "right")
+theme_cleanplots(base_size = 12, base_family = "", legend_position = "right")
 ```
 
 ## Arguments
 
 - base_size:
 
-  Base font size in points (default: `13`).
+  Base font size in points (default: `12`, sized to match the body text
+  of an academic article when the figure is saved at 7 x 5 inches; see
+  [`cleanplots_save()`](https://tdmize.github.io/cleanplots/reference/cleanplots_save.md)).
 
 - base_family:
 
@@ -23,9 +25,9 @@ theme_cleanplots(base_size = 13, base_family = "", legend_position = "right")
 
 - legend_position:
 
-  Position of the legend (default: `"right"`, bottom-justified, matching
-  the Stata scheme's 4-o'clock position). Set to `"none"` to remove, or
-  any value accepted by `ggplot2::theme(legend.position = ...)`.
+  Position of the legend (default: `"right"`, vertically centered). Set
+  to `"none"` to remove, or any value accepted by
+  `ggplot2::theme(legend.position = ...)`.
 
 ## Value
 
@@ -47,8 +49,8 @@ Correspondence to the Stata scheme file:
 
 - No minor gridlines
 
-- Legend at lower right, single column, no frame, no title
-  (`clockdir legend_position 4`, `numstyle legend_cols 1`,
+- Legend at the right, single column, no frame, no title
+  (`clockdir legend_position 3`, `numstyle legend_cols 1`,
   `linestyle legend none`)
 
 - Horizontal y-axis tick labels (`anglestyle vertical_tick horizontal`)

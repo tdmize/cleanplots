@@ -12,7 +12,7 @@ colored correctly without adding scales by hand.
 
 ``` r
 cleanplots_defaults(
-  base_size = 13,
+  base_size = 12,
   point_size = 2,
   point_stroke = 0.7,
   line_width = 0.75,
@@ -26,7 +26,7 @@ cleanplots_defaults(
 
   Base font size in points passed to
   [`theme_cleanplots()`](https://tdmize.github.io/cleanplots/reference/theme_cleanplots.md)
-  (default: `13`).
+  (default: `12`).
 
 - point_size:
 
@@ -45,10 +45,16 @@ cleanplots_defaults(
   [`geom_line()`](https://ggplot2.tidyverse.org/reference/geom_path.html),
   [`geom_path()`](https://ggplot2.tidyverse.org/reference/geom_path.html),
   [`geom_step()`](https://ggplot2.tidyverse.org/reference/geom_path.html),
+  [`geom_density()`](https://ggplot2.tidyverse.org/reference/geom_density.html),
+  [`geom_function()`](https://ggplot2.tidyverse.org/reference/geom_function.html),
   and
   [`geom_smooth()`](https://ggplot2.tidyverse.org/reference/geom_smooth.html)
   (default: `0.75`; ggplot2's own default is 0.5). Error bars, line
-  ranges, and point ranges are set to 80% of this value.
+  ranges, and point ranges are set to 80% of this value. Reference lines
+  ([`geom_hline()`](https://ggplot2.tidyverse.org/reference/geom_abline.html),
+  [`geom_vline()`](https://ggplot2.tidyverse.org/reference/geom_abline.html),
+  [`geom_abline()`](https://ggplot2.tidyverse.org/reference/geom_abline.html))
+  are deliberately left thin and unobtrusive.
 
 - smooth_color:
 
