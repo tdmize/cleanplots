@@ -73,6 +73,6 @@ p <- ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) +
 f <- tempfile(fileext = ".png")
 cleanplots_save(f, p)
 
-# Override any default as needed, e.g. for lecture slides:
+# Override any default as needed, e.g. for presentations and lectures:
 cleanplots_save(f, p, width = 10, height = 5.6)
 ```

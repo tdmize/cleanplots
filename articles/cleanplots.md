@@ -86,10 +86,12 @@ elements:
 
 ``` r
 
-ggplot(mpg, aes(drv, fill = factor(year))) +
-  geom_bar(position = "dodge") +
+titanic <- aggregate(Freq ~ Class + Sex, data = as.data.frame(Titanic), sum)
+
+ggplot(titanic, aes(Sex, Freq, fill = Class)) +
+  geom_col(position = "dodge") +
   scale_fill_cleanplots(palette = "bars") +
-  labs(x = "Drive type", fill = "Year")
+  labs(x = NULL, y = "Passengers and crew", fill = "Class")
 ```
 
 ![](cleanplots_files/figure-html/bars-palette-1.png)
@@ -216,12 +218,12 @@ cleanplots_defaults(base_size = 12, point_size = 2,
 The default text size (12) is chosen to match the body text of an
 academic article when the figure is saved at the recommended size (see
 the next section): if you can read the article, you can read the graph.
-For contexts that need bigger text – lecture slides especially –
-increase it:
+For contexts that need bigger text – presentations and lectures
+especially – increase it:
 
 ``` r
 
-cleanplots_defaults(base_size = 16)   # lecture slides
+cleanplots_defaults(base_size = 16)   # presentations and lectures
 ```
 
 Everything remains overridable per plot: an explicit scale, theme, or
@@ -230,10 +232,10 @@ instead of the automatic bar palette:
 
 ``` r
 
-ggplot(mpg, aes(drv, fill = factor(year))) +
-  geom_bar(position = "dodge") +
+ggplot(titanic, aes(Sex, Freq, fill = Class)) +
+  geom_col(position = "dodge") +
   scale_fill_cleanplots(palette = "default") +
-  labs(x = "Drive type", fill = "Year")
+  labs(x = NULL, y = "Passengers and crew", fill = "Class")
 ```
 
 ![](cleanplots_files/figure-html/override-1.png)
@@ -309,15 +311,35 @@ cleanplots works out of the box with the
 [`cleanplots_defaults()`](https://tdmize.github.io/cleanplots/reference/cleanplots_defaults.md)
 set, their plots pick up the colors and theme automatically.
 
-A coefficient plot with
+The examples below use simulated data on life satisfaction across ages:
+
+``` r
+
+set.seed(376)
+n <- 1000
+sim <- data.frame(
+  age = runif(n, 35, 90),
+  married = factor(sample(c("Not married", "Married"), n, replace = TRUE),
+                   levels = c("Not married", "Married")),
+  educ = factor(sample(c("HS or less", "Some college", "College+"), n,
+                       replace = TRUE),
+                levels = c("HS or less", "Some college", "College+")))
+a <- sim$age - 35
+sim$lifesat <- ifelse(sim$married == "Married",
+                      3.55 + .020 * a - .00012 * a^2,
+                      2.20 + .056 * a - .00042 * a^2) +
+  c(0, .15, .35)[as.integer(sim$educ)] + rnorm(n, 0, .6)
+```
+
+A coefficient plot of nested models with
 [`modelsummary::modelplot()`](https://modelsummary.com/man/modelplot.html):
 
 ``` r
 
-mod1 <- lm(hwy ~ displ + factor(cyl), data = mpg)
-mod2 <- lm(hwy ~ displ + factor(cyl) + drv, data = mpg)
+mod1 <- lm(lifesat ~ age + educ, data = sim)
+mod2 <- lm(lifesat ~ age + educ + married, data = sim)
 
-modelsummary::modelplot(list("Baseline" = mod1, "+ Drive type" = mod2),
+modelsummary::modelplot(list("Baseline" = mod1, "+ Marriage" = mod2),
                         coef_omit = "Intercept") +
   geom_vline(xintercept = 0, linetype = "dashed", color = "gray50") +
   labs(x = "Coefficient estimates and 95% confidence intervals")
@@ -330,9 +352,10 @@ Adjusted predictions for a nominal predictor with
 
 ``` r
 
-mod <- lm(hwy ~ displ * drv + factor(cyl), data = mpg)
+mod <- lm(lifesat ~ poly(age, 2) * married + educ, data = sim)
 
-marginaleffects::plot_predictions(mod, condition = c("cyl", "drv"))
+marginaleffects::plot_predictions(mod, condition = c("educ", "married")) +
+  labs(y = "Predicted life satisfaction")
 ```
 
 ![](cleanplots_files/figure-html/preds-nominal-1.png)
@@ -345,8 +368,9 @@ full-strength palette rather than the soft bar colors:
 
 ``` r
 
-marginaleffects::plot_predictions(mod, condition = c("displ", "drv")) +
-  scale_fill_cleanplots(palette = "default")
+marginaleffects::plot_predictions(mod, condition = c("age", "married")) +
+  scale_fill_cleanplots(palette = "default") +
+  labs(y = "Predicted life satisfaction")
 ```
 
 ![](cleanplots_files/figure-html/preds-continuous-1.png)
@@ -358,24 +382,27 @@ the figure yourself:
 ``` r
 
 pr <- marginaleffects::plot_predictions(
-  mod, condition = c("displ", "drv"), draw = FALSE)
+  mod, condition = c("age", "married"), draw = FALSE)
 
-ggplot(pr, aes(displ, estimate, color = drv, fill = drv)) +
+ggplot(pr, aes(age, estimate, color = married, fill = married)) +
   geom_ribbon(aes(ymin = conf.low, ymax = conf.high),
               alpha = .35, color = NA) +
   geom_line() +
-  labs(y = "Predicted highway MPG")
+  labs(y = "Predicted life satisfaction")
 ```
 
 ![](cleanplots_files/figure-html/preds-draw-false-1.png)
 
-And comparisons (e.g., group differences) with
+And comparisons – here, the marriage gap in life satisfaction across
+ages – with
 [`marginaleffects::plot_comparisons()`](https://rdrr.io/pkg/marginaleffects/man/plot_comparisons.html):
 
 ``` r
 
-marginaleffects::plot_comparisons(mod, variables = "drv",
-                                  condition = "displ")
+marginaleffects::plot_comparisons(mod, variables = "married",
+                                  condition = "age") +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "gray50") +
+  labs(y = "Difference in predicted life satisfaction\n(Married - Not married)")
 ```
 
 ![](cleanplots_files/figure-html/comparisons-1.png)

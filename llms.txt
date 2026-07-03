@@ -55,8 +55,9 @@ ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +
   scale_color_cleanplots()
 
 # Bar charts use the softer bar/area palette
-ggplot(mpg, aes(drv, fill = factor(year))) +
-  geom_bar(position = "dodge") +
+titanic <- aggregate(Freq ~ Class + Sex, data = as.data.frame(Titanic), sum)
+ggplot(titanic, aes(Sex, Freq, fill = Class)) +
+  geom_col(position = "dodge") +
   theme_cleanplots() +
   scale_fill_cleanplots(palette = "bars")
 
