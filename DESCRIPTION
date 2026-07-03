@@ -12,14 +12,17 @@ Description: Color scales and a theme for 'ggplot2' implementing the
     bar/area versions of the palette, and a theme matching the scheme's
     layout defaults.
 License: MIT + file LICENSE
-URL: https://github.com/tdmize/cleanplots, https://www.trentonmize.com/software/cleanplots
+URL: https://tdmize.github.io/cleanplots/, https://github.com/tdmize/cleanplots, https://www.trentonmize.com/software/cleanplots
 BugReports: https://github.com/tdmize/cleanplots/issues
 Encoding: UTF-8
 Imports:
     ggplot2,
     utils
 Suggests:
+    knitr,
+    rmarkdown,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1

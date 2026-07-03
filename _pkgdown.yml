@@ -1,0 +1,34 @@
+url: https://tdmize.github.io/cleanplots/
+
+template:
+  bootstrap: 5
+
+home:
+  title: cleanplots color scales and theme for ggplot2
+  links:
+  - text: cleanplots for Stata
+    href: https://www.trentonmize.com/software/cleanplots
+
+reference:
+- title: Full setup
+  desc: One call to apply the complete cleanplots scheme to a session
+  contents:
+  - cleanplots_defaults
+- title: Colors
+  desc: Color and fill scales, and the palette itself
+  contents:
+  - scale_color_cleanplots
+  - cleanplots_colors
+  - palette_cleanplots
+- title: Shapes and line patterns
+  desc: Marker symbols and line patterns for black & white and colorblind readers
+  contents:
+  - scale_shape_cleanplots
+- title: Theme
+  contents:
+  - theme_cleanplots
+
+navbar:
+  structure:
+    left: [intro, reference, news]
+    right: [search, github]

@@ -4,6 +4,8 @@
 [![R-CMD-check](https://github.com/tdmize/cleanplots/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tdmize/cleanplots/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
+Full documentation: [tdmize.github.io/cleanplots](https://tdmize.github.io/cleanplots/)
+
 Color scales and a theme for **ggplot2** implementing the
 [cleanplots](https://www.trentonmize.com/software/cleanplots) graphing
 scheme by Trenton D. Mize, originally developed for Stata. The scheme is
