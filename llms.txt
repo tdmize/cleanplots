@@ -1,17 +1,17 @@
 # cleanplots for R
 
-Full documentation:
+Full documentation and more examples:
 [tdmize.github.io/cleanplots](https://tdmize.github.io/cleanplots/)
 
 Publication-ready defaults for **ggplot2**: the
 [cleanplots](https://www.trentonmize.com/software/cleanplots) graphing
-scheme by Trenton D. Mize. cleanplots provides professional-looking
-figures with strong data visualization and accessibility defaults –
-colors are chosen to be **colorblind-friendly** and to remain
-**distinguishable when printed in black & white**, with matching marker
-shapes and line patterns so that groups stay distinct across multiple
-visual channels. A companion scheme is available for Stata, so figures
-made in R and Stata share the same design.
+scheme. cleanplots provides professional-looking figures with strong
+data visualization and accessibility defaults – colors are chosen to be
+**colorblind-friendly** and to remain **distinguishable when printed in
+black & white**, with matching marker shapes and line patterns so that
+groups stay distinct across multiple visual channels. A companion scheme
+is available for Stata, so figures made in R and Stata share the same
+design.
 
 ## Installation
 
@@ -41,7 +41,13 @@ ggplot(mpg, aes(displ, hwy, color = class, shape = class)) +
 cleanplots_save("my-figure.png")   # saves at a fixed 7 x 5 in, 300 dpi
 ```
 
-Or apply the pieces individually per plot:
+Or apply the pieces individually per plot. (If you are not using the
+full cleanplots setup, we recommend adding
+[`theme_minimal()`](https://ggplot2.tidyverse.org/reference/ggtheme.html)
+or
+[`theme_cleanplots()`](https://tdmize.github.io/cleanplots/reference/theme_cleanplots.md)
+– the colors and markers are much easier to see against a white
+background.)
 
 ``` r
 

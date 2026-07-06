@@ -33,10 +33,21 @@ to a plot, just like any other palette package:
 
 ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) +
   geom_point() +
-  scale_color_cleanplots()
+  scale_color_cleanplots() +
+  theme_minimal()
 ```
 
 ![](cleanplots_files/figure-html/colors-only-1.png)
+
+One recommendation: if you are not using the full cleanplots setup
+([`theme_cleanplots()`](https://tdmize.github.io/cleanplots/reference/theme_cleanplots.md)
+or
+[`cleanplots_defaults()`](https://tdmize.github.io/cleanplots/reference/cleanplots_defaults.md),
+below), add
+[`theme_minimal()`](https://ggplot2.tidyverse.org/reference/ggtheme.html)
+to your plots – the colors and markers are much easier to see against a
+white background than against ggplot2’s default gray. The examples in
+this vignette do this.
 
 Both scales take the same options:
 
@@ -50,7 +61,8 @@ Both scales take the same options:
 
 ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) +
   geom_point() +
-  scale_color_cleanplots(order = c(7, 1, 2))
+  scale_color_cleanplots(order = c(7, 1, 2)) +
+  theme_minimal()
 ```
 
 ![](cleanplots_files/figure-html/colors-order-1.png)
@@ -91,7 +103,8 @@ titanic <- aggregate(Freq ~ Class + Sex, data = as.data.frame(Titanic), sum)
 ggplot(titanic, aes(Sex, Freq, fill = Class)) +
   geom_col(position = "dodge") +
   scale_fill_cleanplots(palette = "bars") +
-  labs(x = NULL, y = "Passengers and crew", fill = "Class")
+  labs(x = NULL, y = "Passengers and crew", fill = "Class") +
+  theme_minimal()
 ```
 
 ![](cleanplots_files/figure-html/bars-palette-1.png)
@@ -122,7 +135,8 @@ groups is separated by at least two independent channels.
 ggplot(mpg, aes(displ, hwy, color = class, shape = class)) +
   geom_point(size = 2, stroke = 0.7) +
   scale_color_cleanplots() +
-  scale_shape_cleanplots()
+  scale_shape_cleanplots() +
+  theme_minimal()
 ```
 
 ![](cleanplots_files/figure-html/shapes-1.png)
@@ -132,7 +146,8 @@ ggplot(mpg, aes(displ, hwy, color = class, shape = class)) +
 ggplot(economics_long, aes(date, value01, color = variable, linetype = variable)) +
   geom_line(linewidth = 0.75) +
   scale_color_cleanplots() +
-  scale_linetype_cleanplots()
+  scale_linetype_cleanplots() +
+  theme_minimal()
 ```
 
 ![](cleanplots_files/figure-html/linetypes-1.png)
@@ -311,24 +326,13 @@ cleanplots works out of the box with the
 [`cleanplots_defaults()`](https://tdmize.github.io/cleanplots/reference/cleanplots_defaults.md)
 set, their plots pick up the colors and theme automatically.
 
-The examples below use simulated data on life satisfaction across ages:
+The examples below use data on life satisfaction across ages:
 
 ``` r
 
-set.seed(376)
-n <- 1000
-sim <- data.frame(
-  age = runif(n, 35, 90),
-  married = factor(sample(c("Not married", "Married"), n, replace = TRUE),
-                   levels = c("Not married", "Married")),
-  educ = factor(sample(c("HS or less", "Some college", "College+"), n,
-                       replace = TRUE),
-                levels = c("HS or less", "Some college", "College+")))
-a <- sim$age - 35
-sim$lifesat <- ifelse(sim$married == "Married",
-                      3.55 + .020 * a - .00012 * a^2,
-                      2.20 + .056 * a - .00042 * a^2) +
-  c(0, .15, .35)[as.integer(sim$educ)] + rnorm(n, 0, .6)
+sim <- readRDS(url(
+  "https://raw.githubusercontent.com/tdmize/data/master/data/sim_lifesat.rds",
+  open = "rb"))
 ```
 
 A coefficient plot of nested models with
