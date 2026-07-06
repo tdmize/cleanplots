@@ -15,6 +15,12 @@ knitr::opts_chunk$set(
 )
 has_mfx <- requireNamespace("marginaleffects", quietly = TRUE)
 has_msm <- requireNamespace("modelsummary", quietly = TRUE)
+has_sim <- tryCatch({
+  sim <- readRDS(url(
+    "https://raw.githubusercontent.com/tdmize/data/master/data/sim_lifesat.rds",
+    open = "rb"))
+  TRUE
+}, error = function(e) FALSE)
 ```
 
 cleanplots provides publication-ready defaults for ggplot2. The goal is
@@ -47,8 +53,15 @@ just like any other palette package:
 ```{r colors-only}
 ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) +
   geom_point() +
-  scale_color_cleanplots()
+  scale_color_cleanplots() +
+  theme_minimal()
 ```
+
+One recommendation: if you are not using the full cleanplots setup
+(`theme_cleanplots()` or `cleanplots_defaults()`, below), add
+`theme_minimal()` to your plots -- the colors and markers are much
+easier to see against a white background than against ggplot2's
+default gray. The examples in this vignette do this.
 
 Both scales take the same options:
 
@@ -61,7 +74,8 @@ Both scales take the same options:
 ```{r colors-order}
 ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) +
   geom_point() +
-  scale_color_cleanplots(order = c(7, 1, 2))
+  scale_color_cleanplots(order = c(7, 1, 2)) +
+  theme_minimal()
 ```
 
 To use individual colors manually, `cleanplots_colors()` returns hex
@@ -91,7 +105,8 @@ titanic <- aggregate(Freq ~ Class + Sex, data = as.data.frame(Titanic), sum)
 ggplot(titanic, aes(Sex, Freq, fill = Class)) +
   geom_col(position = "dodge") +
   scale_fill_cleanplots(palette = "bars") +
-  labs(x = NULL, y = "Passengers and crew", fill = "Class")
+  labs(x = NULL, y = "Passengers and crew", fill = "Class") +
+  theme_minimal()
 ```
 
 ## 3. Shapes and line patterns
@@ -116,14 +131,16 @@ groups is separated by at least two independent channels.
 ggplot(mpg, aes(displ, hwy, color = class, shape = class)) +
   geom_point(size = 2, stroke = 0.7) +
   scale_color_cleanplots() +
-  scale_shape_cleanplots()
+  scale_shape_cleanplots() +
+  theme_minimal()
 ```
 
 ```{r linetypes}
 ggplot(economics_long, aes(date, value01, color = variable, linetype = variable)) +
   geom_line(linewidth = 0.75) +
   scale_color_cleanplots() +
-  scale_linetype_cleanplots()
+  scale_linetype_cleanplots() +
+  theme_minimal()
 ```
 
 ## 4. The theme
@@ -270,30 +287,18 @@ cleanplots works out of the box with the
 `cleanplots_defaults()` set, their plots pick up the colors and theme
 automatically.
 
-The examples below use simulated data on life satisfaction across
-ages:
+The examples below use data on life satisfaction across ages:
 
-```{r sim-data}
-set.seed(376)
-n <- 1000
-sim <- data.frame(
-  age = runif(n, 35, 90),
-  married = factor(sample(c("Not married", "Married"), n, replace = TRUE),
-                   levels = c("Not married", "Married")),
-  educ = factor(sample(c("HS or less", "Some college", "College+"), n,
-                       replace = TRUE),
-                levels = c("HS or less", "Some college", "College+")))
-a <- sim$age - 35
-sim$lifesat <- ifelse(sim$married == "Married",
-                      3.55 + .020 * a - .00012 * a^2,
-                      2.20 + .056 * a - .00042 * a^2) +
-  c(0, .15, .35)[as.integer(sim$educ)] + rnorm(n, 0, .6)
+```{r sim-load, eval = FALSE}
+sim <- readRDS(url(
+  "https://raw.githubusercontent.com/tdmize/data/master/data/sim_lifesat.rds",
+  open = "rb"))
 ```
 
 A coefficient plot of nested models with
 `modelsummary::modelplot()`:
 
-```{r coefplot, eval = has_msm}
+```{r coefplot, eval = has_msm && has_sim}
 mod1 <- lm(lifesat ~ age + educ, data = sim)
 mod2 <- lm(lifesat ~ age + educ + married, data = sim)
 
@@ -306,7 +311,7 @@ modelsummary::modelplot(list("Baseline" = mod1, "+ Marriage" = mod2),
 Adjusted predictions for a nominal predictor with
 `marginaleffects::plot_predictions()`:
 
-```{r preds-nominal, eval = has_mfx}
+```{r preds-nominal, eval = has_mfx && has_sim}
 mod <- lm(lifesat ~ poly(age, 2) * married + educ, data = sim)
 
 marginaleffects::plot_predictions(mod, condition = c("educ", "married")) +
@@ -319,7 +324,7 @@ transparency (alpha = 0.1), which is tuned for saturated colors. Add
 `scale_fill_cleanplots(palette = "default")` so the ribbons use the
 full-strength palette rather than the soft bar colors:
 
-```{r preds-continuous, eval = has_mfx}
+```{r preds-continuous, eval = has_mfx && has_sim}
 marginaleffects::plot_predictions(mod, condition = c("age", "married")) +
   scale_fill_cleanplots(palette = "default") +
   labs(y = "Predicted life satisfaction")
@@ -329,7 +334,7 @@ For full control of the ribbons (or anything else), use
 `plot_predictions(..., draw = FALSE)` to get the plotting data and
 build the figure yourself:
 
-```{r preds-draw-false, eval = has_mfx}
+```{r preds-draw-false, eval = has_mfx && has_sim}
 pr <- marginaleffects::plot_predictions(
   mod, condition = c("age", "married"), draw = FALSE)
 
@@ -343,7 +348,7 @@ ggplot(pr, aes(age, estimate, color = married, fill = married)) +
 And comparisons -- here, the marriage gap in life satisfaction across
 ages -- with `marginaleffects::plot_comparisons()`:
 
-```{r comparisons, eval = has_mfx}
+```{r comparisons, eval = has_mfx && has_sim}
 marginaleffects::plot_comparisons(mod, variables = "married",
                                   condition = "age") +
   geom_hline(yintercept = 0, linetype = "dashed", color = "gray50") +

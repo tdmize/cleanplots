@@ -4,11 +4,11 @@
 [![R-CMD-check](https://github.com/tdmize/cleanplots/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tdmize/cleanplots/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-Full documentation: [tdmize.github.io/cleanplots](https://tdmize.github.io/cleanplots/)
+Full documentation and more examples: [tdmize.github.io/cleanplots](https://tdmize.github.io/cleanplots/)
 
 Publication-ready defaults for **ggplot2**: the
 [cleanplots](https://www.trentonmize.com/software/cleanplots) graphing
-scheme by Trenton D. Mize. cleanplots provides professional-looking
+scheme. cleanplots provides professional-looking
 figures with strong data visualization and accessibility defaults --
 colors are chosen to be **colorblind-friendly** and to remain
 **distinguishable when printed in black & white**, with matching marker
@@ -42,7 +42,10 @@ ggplot(mpg, aes(displ, hwy, color = class, shape = class)) +
 cleanplots_save("my-figure.png")   # saves at a fixed 7 x 5 in, 300 dpi
 ```
 
-Or apply the pieces individually per plot:
+Or apply the pieces individually per plot. (If you are not using the
+full cleanplots setup, we recommend adding `theme_minimal()` or
+`theme_cleanplots()` -- the colors and markers are much easier to see
+against a white background.)
 
 ```r
 library(ggplot2)
