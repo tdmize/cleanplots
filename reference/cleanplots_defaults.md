@@ -13,9 +13,9 @@ colored correctly without adding scales by hand.
 ``` r
 cleanplots_defaults(
   base_size = 12,
-  point_size = 2,
+  point_size = 1.4,
   point_stroke = 0.7,
-  line_width = 0.75,
+  line_width = 0.65,
   smooth_color = "#D50000"
 )
 ```
@@ -32,7 +32,9 @@ cleanplots_defaults(
 
   Default size for
   [`geom_point()`](https://ggplot2.tidyverse.org/reference/geom_point.html)
-  markers (default: `2`; ggplot2's own default is 1.5).
+  markers (default: `1.4`). The midpoint dot of
+  [`geom_pointrange()`](https://ggplot2.tidyverse.org/reference/geom_linerange.html)
+  (used in coefficient plots) is sized to match.
 
 - point_stroke:
 
@@ -49,7 +51,7 @@ cleanplots_defaults(
   [`geom_function()`](https://ggplot2.tidyverse.org/reference/geom_function.html),
   and
   [`geom_smooth()`](https://ggplot2.tidyverse.org/reference/geom_smooth.html)
-  (default: `0.75`; ggplot2's own default is 0.5). Error bars, line
+  (default: `0.65`; ggplot2's own default is 0.5). Error bars, line
   ranges, and point ranges are set to 80% of this value. Reference lines
   ([`geom_hline()`](https://ggplot2.tidyverse.org/reference/geom_abline.html),
   [`geom_vline()`](https://ggplot2.tidyverse.org/reference/geom_abline.html),

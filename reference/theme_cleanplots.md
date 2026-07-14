@@ -41,7 +41,7 @@ Correspondence to the Stata scheme file:
 
 - No plot region border (`linestyle plotregion none`)
 
-- Axis lines, ticks in gs10 gray (`color axisline gs10`, etc.)
+- Light gray axis lines and ticks (`color axisline gs13`, etc.)
 
 - Dotted gs10 major gridlines, horizontal and vertical
   (`draw_major_hgrid yes`, `draw_major_vgrid yes`,

@@ -123,8 +123,9 @@ several visual channels at once:
 assigns hollow marker shapes to the dark colors and solid shapes to the
 light colors, and
 [`scale_linetype_cleanplots()`](https://tdmize.github.io/cleanplots/reference/scale_shape_cleanplots.md)
-assigns line patterns (solid, solid, dashed, dashed, shortdash,
-shortdash, longdash, longdash) so that any two groups sharing a shape or
+assigns line patterns in pairs, ordered from closest to solid to
+furthest (solid, solid, longdash, longdash, twodash, twodash, dashed,
+dashed, dotdash, dotdash), so that any two groups sharing a shape or
 pattern always differ strongly in lightness. Groups remain
 distinguishable by color, by lightness, by marker shape and fill, and by
 line pattern.
