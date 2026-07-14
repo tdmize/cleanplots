@@ -9,7 +9,7 @@
 #' \itemize{
 #'   \item White background (`color background white`)
 #'   \item No plot region border (`linestyle plotregion none`)
-#'   \item Axis lines, ticks in gs10 gray (`color axisline gs10`, etc.)
+#'   \item Light gray axis lines and ticks (`color axisline gs13`, etc.)
 #'   \item Dotted gs10 major gridlines, horizontal and vertical
 #'     (`draw_major_hgrid yes`, `draw_major_vgrid yes`,
 #'     `linepattern major_grid dot`, `color major_grid gs10`)
@@ -42,7 +42,8 @@
 #' @export
 theme_cleanplots <- function(base_size = 12, base_family = "",
                              legend_position = "right") {
-  gs10 <- "#A0A0A0" # Stata gs10, used for axis lines, ticks, and gridlines
+  gs10 <- "#A0A0A0" # Stata gs10, used for gridlines
+  gs13 <- "#D0D0D0" # Stata gs13, used for axis lines and ticks
 
   ggplot2::theme_bw(base_size = base_size, base_family = base_family) +
     ggplot2::theme(
@@ -51,9 +52,9 @@ theme_cleanplots <- function(base_size = 12, base_family = "",
       plot.background = ggplot2::element_rect(fill = "white", color = NA),
       panel.border = ggplot2::element_blank(),
 
-      # Axis lines and ticks: light gray (gs10)
-      axis.line = ggplot2::element_line(color = gs10, linewidth = 0.4),
-      axis.ticks = ggplot2::element_line(color = gs10, linewidth = 0.3),
+      # Axis lines and ticks: very light gray (gs13), a quiet frame
+      axis.line = ggplot2::element_line(color = gs13, linewidth = 0.3),
+      axis.ticks = ggplot2::element_line(color = gs13, linewidth = 0.25),
 
       # Dotted gs10 major gridlines (both directions); no minor gridlines
       panel.grid.major = ggplot2::element_line(

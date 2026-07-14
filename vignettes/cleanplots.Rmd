@@ -56,9 +56,9 @@ vignette walks from the lightest touch (colors only) to the full setup
   symbols: hollow shapes for the dark colors, solid shapes for the
   light colors, so groups are distinguishable even without color.
 * **`scale_linetype_cleanplots()`** -- Applies the cleanplots line
-  patterns (solid, solid, dashed, dashed, shortdash, shortdash,
-  longdash, longdash), keeping line graphs readable in black & white
-  and for colorblind readers.
+  patterns in pairs (solid, solid, longdash, longdash, twodash,
+  twodash, dashed, dashed, dotdash, dotdash), keeping line graphs
+  readable in black & white and for colorblind readers.
 * **`theme_cleanplots()`** -- Applies the cleanplots look to a single
   plot: white background, dotted gridlines, gray axis lines, frameless
   legend at the right, and outlined facet strips.
@@ -149,8 +149,8 @@ ggplot(titanic, aes(Sex, Freq, fill = Class)) +
 
 The cleanplots palettes are for **nominal** (unordered) groups. For
 **ordinal** or ordered categories -- Likert responses, education
-levels, dose groups -- use a palette where lightness increases
-monotonically with the ordering, so the order itself survives
+levels, dose groups -- use a palette where lightness changes
+with the ordering (here, darker = higher), so the order itself survives
 colorblindness and black & white printing. We recommend **cividis**
 (Nunez, Anderton, & Renslow 2018), a variant of viridis (van der Walt
 & Smith 2015) optimized so that readers with red-green colorblindness
@@ -160,8 +160,8 @@ cleanplots features:
 
 ```{r ordinal}
 ggplot(diamonds, aes(price, color = cut)) +
-  geom_density(linewidth = 0.75) +
-  scale_color_viridis_d(option = "cividis", end = 0.95) +
+  geom_density(linewidth = 0.65) +
+  scale_color_viridis_d(option = "cividis", end = 0.95, direction = -1) +
   labs(x = "Price") +
   theme_minimal()
 ```
@@ -197,8 +197,10 @@ ever depends on a single cue:
 * **Marker shape and fill**: `scale_shape_cleanplots()` gives hollow
   shapes (circle, square, triangle, diamond) to the dark colors and
   solid shapes to the light colors.
-* **Line pattern**: `scale_linetype_cleanplots()` assigns solid,
-  solid, dashed, dashed, shortdash, shortdash, longdash, longdash.
+* **Line pattern**: `scale_linetype_cleanplots()` assigns patterns in
+  pairs, ordered from closest to solid to furthest: solid, solid,
+  longdash, longdash, twodash, twodash, dashed, dashed, dotdash,
+  dotdash.
 
 The assignments are coordinated: any two groups that share a shape or
 a line pattern always differ strongly in lightness, so every pair of
@@ -206,17 +208,23 @@ groups is separated by at least two independent channels.
 
 ```{r shapes}
 ggplot(mpg, aes(displ, hwy, color = class, shape = class)) +
-  geom_point(size = 2, stroke = 0.7) +
+  geom_point(size = 1.4, stroke = 0.7) +
   scale_color_cleanplots() +
   scale_shape_cleanplots() +
   theme_minimal()
 ```
 
 ```{r linetypes}
-ggplot(economics_long, aes(date, value01, color = variable, linetype = variable)) +
-  geom_line(linewidth = 0.75) +
+cities <- c("Collin County", "Austin", "Dallas", "Corpus Christi",
+            "Wichita Falls")
+tx <- aggregate(median ~ year + city, mean, na.rm = TRUE,
+                data = subset(txhousing, city %in% cities))
+
+ggplot(tx, aes(year, median / 1000, color = city, linetype = city)) +
+  geom_line(linewidth = 0.65) +
   scale_color_cleanplots() +
   scale_linetype_cleanplots() +
+  labs(x = NULL, y = "Median home price ($1,000s)", color = "", linetype = "") +
   theme_minimal()
 ```
 
@@ -229,7 +237,7 @@ theme, add it per plot:
 
 ```{r theme}
 ggplot(mpg, aes(displ, hwy, color = class, shape = class)) +
-  geom_point(size = 2, stroke = 0.7) +
+  geom_point(size = 1.4, stroke = 0.7) +
   scale_color_cleanplots() +
   scale_shape_cleanplots() +
   theme_cleanplots()
@@ -251,9 +259,9 @@ After this, with **no scales or theme added**:
 * discrete `color` aesthetics use the main palette, and discrete
   `fill` aesthetics use the softer bar palette (bars and areas
   automatically get the gentler colors);
-* points are larger with heavier outlines (`size = 2`,
+* points have heavier outlines (`size = 1.4`,
   `stroke = 0.7`), so the hollow marker shapes are clearly visible;
-* lines are thicker (`linewidth = 0.75`) for `geom_line()`,
+* lines are thicker (`linewidth = 0.65`) for `geom_line()`,
   `geom_path()`, `geom_step()`, `geom_density()`, `geom_function()`,
   and `geom_smooth()`; error bars, linereanges, and pointranges use
   80% of that;
@@ -275,8 +283,8 @@ ggplot(mpg, aes(displ, hwy)) +
 All settings are arguments if you prefer different sizes:
 
 ```{r defaults-args, eval = FALSE}
-cleanplots_defaults(base_size = 12, point_size = 2,
-                    point_stroke = 0.7, line_width = 0.75,
+cleanplots_defaults(base_size = 12, point_size = 1.4,
+                    point_stroke = 0.7, line_width = 0.65,
                     smooth_color = "#D50000")
 ```
 
@@ -289,6 +297,16 @@ lectures especially -- increase it:
 ```{r defaults-slides, eval = FALSE}
 cleanplots_defaults(base_size = 16)   # presentations and lectures
 ```
+
+One important exception: ggplot2 only provides session-default hooks
+for `color` and `fill` scales, so **shape and linetype scales cannot be
+applied automatically** -- there is no equivalent mechanism for them.
+Whenever you map `shape` or `linetype` to a variable, add
+`scale_shape_cleanplots()` or `scale_linetype_cleanplots()` to that
+plot. This matters in particular for 7+ groups: ggplot2's built-in
+shape scale handles a maximum of 6 shapes and silently drops the
+markers for additional groups, while `scale_shape_cleanplots()`
+provides 10.
 
 Everything remains overridable per plot: an explicit scale, theme, or
 aesthetic always wins. For example, to use the main palette for a fill

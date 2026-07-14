@@ -9,12 +9,15 @@ test_that("cleanplots_defaults sets theme, geoms, and scale options", {
                    scale_color_cleanplots)
   expect_true(is.function(getOption("ggplot2.discrete.fill")))
   pt <- ggplot2::GeomPoint$default_aes
-  expect_equal(pt$size, 2)
+  expect_equal(pt$size, 1.4)
   expect_equal(pt$stroke, 0.7)
-  expect_equal(ggplot2::GeomLine$default_aes$linewidth, 0.75)
-  expect_equal(ggplot2::GeomDensity$default_aes$linewidth, 0.75)
+  expect_equal(ggplot2::GeomLine$default_aes$linewidth, 0.65)
+  expect_equal(ggplot2::GeomDensity$default_aes$linewidth, 0.65)
+  pr <- ggplot2::GeomPointrange$default_aes
+  expect_equal(pr$linewidth, 0.8 * 0.65)
+  expect_equal(pr$size, 1.4 / 4)
   sm <- ggplot2::GeomSmooth$default_aes
-  expect_equal(sm$linewidth, 0.75)
+  expect_equal(sm$linewidth, 0.65)
   expect_equal(unclass(sm$colour)[[1]], "#D50000")
 
   # default color scale actually applies in a plot

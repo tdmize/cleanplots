@@ -31,7 +31,7 @@ Correspondence to the Stata scheme file:
 \itemize{
 \item White background (\verb{color background white})
 \item No plot region border (\verb{linestyle plotregion none})
-\item Axis lines, ticks in gs10 gray (\verb{color axisline gs10}, etc.)
+\item Light gray axis lines and ticks (\verb{color axisline gs13}, etc.)
 \item Dotted gs10 major gridlines, horizontal and vertical
 (\verb{draw_major_hgrid yes}, \verb{draw_major_vgrid yes},
 \verb{linepattern major_grid dot}, \verb{color major_grid gs10})

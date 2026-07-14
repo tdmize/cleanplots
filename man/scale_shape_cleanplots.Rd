@@ -16,7 +16,7 @@ scale_linetype_cleanplots(...)
 }
 \description{
 Discrete shape and linetype scales matching the marker symbols and
-line patterns of the Stata cleanplots scheme. Combined with
+line patterns of the cleanplots scheme. Combined with
 \code{\link[=scale_color_cleanplots]{scale_color_cleanplots()}}, these make
 series distinguishable even when printed in black & white or viewed
 with colorblindness: markers alternate hollow (dark colors) and solid

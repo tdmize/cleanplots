@@ -31,13 +31,14 @@
 #' @param base_size Base font size in points passed to
 #'   [theme_cleanplots()] (default: `12`).
 #' @param point_size Default size for `geom_point()` markers
-#'   (default: `2`; ggplot2's own default is 1.5).
+#'   (default: `1.4`). The midpoint dot of `geom_pointrange()` (used in
+#'   coefficient plots) is sized to match.
 #' @param point_stroke Default outline thickness for markers, which
 #'   controls how visible the hollow shapes are (default: `0.7`;
 #'   ggplot2's own default is 0.5).
 #' @param line_width Default line width for `geom_line()`, `geom_path()`,
 #'   `geom_step()`, `geom_density()`, `geom_function()`, and
-#'   `geom_smooth()` (default: `0.75`; ggplot2's own default is 0.5).
+#'   `geom_smooth()` (default: `0.65`; ggplot2's own default is 0.5).
 #'   Error bars, line ranges, and point ranges are set to 80% of this
 #'   value. Reference lines (`geom_hline()`, `geom_vline()`,
 #'   `geom_abline()`) are deliberately left thin and unobtrusive.
@@ -54,8 +55,8 @@
 #' ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) +
 #'   geom_point()
 #' @export
-cleanplots_defaults <- function(base_size = 12, point_size = 2,
-                                point_stroke = 0.7, line_width = 0.75,
+cleanplots_defaults <- function(base_size = 12, point_size = 1.4,
+                                point_stroke = 0.7, line_width = 0.65,
                                 smooth_color = "#D50000") {
   # Default theme
   ggplot2::theme_set(theme_cleanplots(base_size = base_size))
@@ -70,9 +71,14 @@ cleanplots_defaults <- function(base_size = 12, point_size = 2,
   ggplot2::update_geom_defaults(
     "smooth", list(linewidth = line_width, colour = smooth_color)
   )
-  for (g in c("errorbar", "linerange", "pointrange")) {
+  for (g in c("errorbar", "linerange")) {
     ggplot2::update_geom_defaults(g, list(linewidth = 0.8 * line_width))
   }
+  # pointrange: CI line at 80% of line_width; midpoint dot sized to match
+  # point_size (the dot is drawn at size * fatten, with fatten = 4)
+  ggplot2::update_geom_defaults(
+    "pointrange", list(linewidth = 0.8 * line_width, size = point_size / 4)
+  )
 
   # Default discrete color/fill scales: main palette for color,
   # softer bar palette for fill (as in the Stata scheme)

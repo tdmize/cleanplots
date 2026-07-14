@@ -117,10 +117,10 @@ Color alone reliably distinguishes about 4-5 groups. Beyond that -- and
 for black & white printing and colorblind readers -- cleanplots varies
 several visual channels at once: `scale_shape_cleanplots()` assigns
 hollow marker shapes to the dark colors and solid shapes to the light
-colors, and `scale_linetype_cleanplots()` assigns line patterns (solid,
-solid, dashed, dashed, shortdash, shortdash, longdash, longdash) so
-that any two groups sharing a shape or pattern always differ strongly
-in lightness. Groups remain distinguishable by color, by lightness, by
+colors, and `scale_linetype_cleanplots()` assigns line patterns in pairs, ordered
+from closest to solid to furthest (solid, solid, longdash, longdash,
+twodash, twodash, dashed, dashed, dotdash, dotdash), so that any two
+groups sharing a shape or pattern always differ strongly in lightness. Groups remain distinguishable by color, by lightness, by
 marker shape and fill, and by line pattern.
 
 ```r

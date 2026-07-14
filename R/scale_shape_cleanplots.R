@@ -7,21 +7,21 @@
 # lightness.
 .cleanplots_shapes <- c(1, 16, 0, 15, 2, 17, 5, 18, 3, 3)
 
-# Line patterns matching the scheme (linepattern p1line-p10line):
-# solid, solid, dashed, dashed, shortdash, shortdash, longdash,
-# longdash, solid, solid.
-# Series sharing a line pattern (p1/p2, p3/p4, p5/p6, p7/p8) always
-# differ strongly in lightness, so line-only plots remain readable in
-# black & white and under colorblindness. "22" is a short dash.
+# Line patterns in pairs, ordered from closest to solid to furthest:
+# solid, solid, longdash, longdash, twodash, twodash, dashed, dashed,
+# dotdash, dotdash.
+# Series sharing a line pattern (p1/p2, p3/p4, ...) always differ
+# strongly in lightness, so line-only plots remain readable in black &
+# white and under colorblindness.
 .cleanplots_linetypes <- c(
-  "solid", "solid", "dashed", "dashed", "22", "22",
-  "longdash", "longdash", "solid", "solid"
+  "solid", "solid", "longdash", "longdash", "twodash", "twodash",
+  "dashed", "dashed", "dotdash", "dotdash"
 )
 
 #' cleanplots shape and linetype scales for ggplot2
 #'
 #' Discrete shape and linetype scales matching the marker symbols and
-#' line patterns of the Stata cleanplots scheme. Combined with
+#' line patterns of the cleanplots scheme. Combined with
 #' [`scale_color_cleanplots()`][scale_color_cleanplots], these make
 #' series distinguishable even when printed in black & white or viewed
 #' with colorblindness: markers alternate hollow (dark colors) and solid
