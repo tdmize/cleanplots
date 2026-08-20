@@ -1,8 +1,5 @@
 # cleanplots for R
 
-Full documentation and more examples:
-[tdmize.github.io/cleanplots](https://tdmize.github.io/cleanplots/)
-
 Publication-ready defaults for **ggplot2**: the
 [cleanplots](https://www.trentonmize.com/software/cleanplots) graphing
 scheme. cleanplots provides professional-looking figures with strong
