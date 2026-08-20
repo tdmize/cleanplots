@@ -4,8 +4,6 @@
 [![R-CMD-check](https://github.com/tdmize/cleanplots/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tdmize/cleanplots/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-Full documentation and more examples: [tdmize.github.io/cleanplots](https://tdmize.github.io/cleanplots/)
-
 Publication-ready defaults for **ggplot2**: the
 [cleanplots](https://www.trentonmize.com/software/cleanplots) graphing
 scheme. cleanplots provides professional-looking
