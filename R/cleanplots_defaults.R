@@ -1,11 +1,9 @@
 #' Set cleanplots defaults for the session
 #'
-#' One call makes ggplot2 behave like the Stata cleanplots scheme for the
-#' rest of the session: sets [theme_cleanplots()] as the default theme,
-#' makes points, markers, and lines larger and thicker (matching the
-#' scheme's more visible defaults), and registers the cleanplots color and
-#' fill scales as the session defaults so plots are colored correctly
-#' without adding scales by hand.
+#' One call sets up cleanplots for the rest of the session: it makes
+#' [theme_cleanplots()] the default theme, makes points and lines larger and
+#' thicker, and uses the cleanplots colors for every plot, so you don't have
+#' to add scales by hand.
 #'
 #' After calling `cleanplots_defaults()`:
 #' \itemize{

@@ -1,12 +1,10 @@
 #' Save a plot at cleanplots' recommended size
 #'
-#' A drop-in replacement for [ggplot2::ggsave()] with sensible fixed
-#' defaults: 7 x 5 inches at 300 dpi. `ggsave()` without explicit
-#' dimensions saves at the current size of your plot window, so figures
-#' come out at a different size every time the window changes -- and all
-#' text, marker, and line sizes are physical units, so the same plot can
-#' look cramped or sparse depending on nothing but the window.
-#' `cleanplots_save()` gives every figure the same canvas.
+#' Saves a plot at a fixed size, 7 x 5 inches at 300 dpi, using
+#' [ggplot2::ggsave()]. Without a set size, `ggsave()` saves at the current
+#' size of your plot window, so the same plot can look cramped or sparse
+#' depending on the window. `cleanplots_save()` gives every figure the same
+#' size.
 #'
 #' The defaults are chosen for academic work: 7 x 5 inches matches the
 #' default figure size in R Markdown (HTML) documents, and a 7-inch-wide

@@ -31,13 +31,11 @@ print-quality).}
 Invisibly returns the file name.
 }
 \description{
-A drop-in replacement for \code{\link[ggplot2:ggsave]{ggplot2::ggsave()}} with sensible fixed
-defaults: 7 x 5 inches at 300 dpi. \code{ggsave()} without explicit
-dimensions saves at the current size of your plot window, so figures
-come out at a different size every time the window changes -- and all
-text, marker, and line sizes are physical units, so the same plot can
-look cramped or sparse depending on nothing but the window.
-\code{cleanplots_save()} gives every figure the same canvas.
+Saves a plot at a fixed size, 7 x 5 inches at 300 dpi, using
+\code{\link[ggplot2:ggsave]{ggplot2::ggsave()}}. Without a set size, \code{ggsave()} saves at the current
+size of your plot window, so the same plot can look cramped or sparse
+depending on the window. \code{cleanplots_save()} gives every figure the same
+size.
 }
 \details{
 The defaults are chosen for academic work: 7 x 5 inches matches the

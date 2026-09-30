@@ -44,10 +44,10 @@ colors to use (default: \code{1:10}).}
 \item{...}{Additional arguments passed to \code{\link[ggplot2:discrete_scale]{ggplot2::discrete_scale()}}.}
 }
 \description{
-Discrete color and fill scales using the cleanplots color scheme
-(Mize), a port of the colors from the Stata \code{cleanplots} graphing scheme.
-The palette is designed for clean, publication-ready plots of predictions
-and marginal effects.
+Color and fill scales for groups that use the cleanplots colors, the
+same colors as my \code{cleanplots} scheme for Stata. They are designed for
+clean, publication-ready plots, including plots of predictions and
+marginal effects.
 }
 \details{
 The \code{"default"} palette contains the 10 colors used for markers, lines,

@@ -1,9 +1,9 @@
 #' cleanplots color scales for ggplot2
 #'
-#' Discrete color and fill scales using the cleanplots color scheme
-#' (Mize), a port of the colors from the Stata `cleanplots` graphing scheme.
-#' The palette is designed for clean, publication-ready plots of predictions
-#' and marginal effects.
+#' Color and fill scales for groups that use the cleanplots colors, the
+#' same colors as my `cleanplots` scheme for Stata. They are designed for
+#' clean, publication-ready plots, including plots of predictions and
+#' marginal effects.
 #'
 #' The `"default"` palette contains the 10 colors used for markers, lines,
 #' and confidence intervals. The `"bars"` palette contains the softer,

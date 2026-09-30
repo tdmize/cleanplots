@@ -21,10 +21,10 @@ accepted by \code{ggplot2::theme(legend.position = ...)}.}
 A ggplot2 theme object.
 }
 \description{
-A ggplot2 theme that replicates the non-color settings of the Stata
-\code{cleanplots} graphing scheme: white background, no plot-region border,
-light gray (gs10) axis lines and ticks, dotted light gray horizontal and
-vertical gridlines, and a frameless legend in the lower right.
+A ggplot2 theme with the non-color settings of my Stata \code{cleanplots}
+scheme: a white background, no border around the plot, light gray axis
+lines and ticks, dotted light gray gridlines, and a legend at the right
+with no frame.
 }
 \details{
 Correspondence to the Stata scheme file:

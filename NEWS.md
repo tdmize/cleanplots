@@ -1,3 +1,9 @@
+# cleanplots (development version)
+
+* Rewrote the README, the Getting started vignette, and the short
+  description at the top of each function's help page in plainer language.
+  No code changes.
+
 # cleanplots 0.2.0
 
 * Initial release.

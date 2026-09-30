@@ -24,8 +24,8 @@ A function that takes a single integer \code{n} and returns a character
 vector of \code{n} hex colors.
 }
 \description{
-Generate a palette function for the cleanplots color scheme. This function
-is usually not called directly, but from within
+Creates the palette function behind the cleanplots color scales. You
+usually don't need to call it directly; it is used by
 \code{\link[=scale_color_cleanplots]{scale_color_cleanplots()}}.
 }
 \examples{

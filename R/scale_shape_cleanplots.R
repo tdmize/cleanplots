@@ -20,13 +20,12 @@
 
 #' cleanplots shape and linetype scales for ggplot2
 #'
-#' Discrete shape and linetype scales matching the marker symbols and
-#' line patterns of the cleanplots scheme. Combined with
-#' [`scale_color_cleanplots()`][scale_color_cleanplots], these make
-#' series distinguishable even when printed in black & white or viewed
-#' with colorblindness: markers alternate hollow (dark colors) and solid
-#' (light colors) shapes, and series that share a line pattern always
-#' differ strongly in lightness.
+#' Shape and line pattern scales that match the cleanplots markers and line
+#' patterns. Together with [`scale_color_cleanplots()`][scale_color_cleanplots],
+#' they keep groups distinguishable in black and white and for colorblind
+#' readers: markers are hollow for the dark colors and solid for the light
+#' colors, and groups that share a line pattern always differ a lot in
+#' lightness.
 #'
 #' @param ... Additional arguments passed to
 #'   [ggplot2::scale_shape_manual()] or
