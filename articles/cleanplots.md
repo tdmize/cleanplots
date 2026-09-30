@@ -1,61 +1,57 @@
 # Getting started with cleanplots
 
-cleanplots provides publication-ready defaults for ggplot2. The goal is
-professional-looking figures with strong data visualization and
-accessibility defaults, with no per-plot effort: a color palette that is
-**colorblind-friendly** and remains **distinguishable when printed in
-black & white**, matching marker shapes and line patterns that keep
-groups distinct across multiple visual channels, a clean theme, and
-consistent figure sizing. A companion [cleanplots scheme for
+cleanplots makes clean, professional-looking ggplot2 figures without any
+extra work on each plot. It gives you a color palette that is
+**colorblind-friendly** and stays **distinguishable when printed in
+black and white**, matching marker shapes and line patterns so groups
+stay distinct, a clean theme, and consistent figure sizes. My
+[cleanplots scheme for
 Stata](https://www.trentonmize.com/software/cleanplots) uses the same
-design, so figures made in R and Stata look like siblings.
+design, so figures made in R and Stata look alike.
 
-The package is **layered**: use as little or as much as you want. This
-vignette walks from the lightest touch (colors only) to the full setup
-(one call that changes everything).
+You can use as little or as much of cleanplots as you want. This page
+starts with the lightest touch (just the colors) and ends with the full
+setup (one call that changes everything).
 
 ## Functions at a glance
 
-- **[`cleanplots_defaults()`](https://tdmize.github.io/cleanplots/reference/cleanplots_defaults.md)**
-  – One call applies the full cleanplots setup for the session: theme,
-  automatic colors (main palette for color, soft bar palette for fill),
-  larger markers, thicker lines, and red
+- **[`cleanplots_defaults()`](https://tdmize.github.io/cleanplots/reference/cleanplots_defaults.md)**:
+  one call sets up everything for the session: the theme, automatic
+  colors (main colors for color, softer bar colors for fill), larger
+  markers, thicker lines, and red
   [`geom_smooth()`](https://ggplot2.tidyverse.org/reference/geom_smooth.html)
-  fit lines. All sizes adjustable via arguments (e.g., `base_size = 16`
-  for presentations and lectures).
-- **[`scale_color_cleanplots()`](https://tdmize.github.io/cleanplots/reference/scale_color_cleanplots.md)**
-  – Applies the cleanplots colors to a plot’s `color` aesthetic;
-  everything else is left unchanged. Options to reorder
-  (`order = c(7, 1, 2)`) or reverse the palette.
-- **`scale_fill_cleanplots(palette = "bars")`** – Applies the softer
-  cleanplots colors to a plot’s `fill` aesthetic, designed for ink-heavy
-  elements like bars, boxplots, and areas. Use `palette = "default"` for
-  the full-strength colors.
-- **[`scale_shape_cleanplots()`](https://tdmize.github.io/cleanplots/reference/scale_shape_cleanplots.md)**
-  – Applies the cleanplots marker symbols: hollow shapes for the dark
-  colors, solid shapes for the light colors, so groups are
-  distinguishable even without color.
-- **[`scale_linetype_cleanplots()`](https://tdmize.github.io/cleanplots/reference/scale_shape_cleanplots.md)**
-  – Applies the cleanplots line patterns in pairs (solid, solid,
-  longdash, longdash, twodash, twodash, dashed, dashed, dotdash,
-  dotdash), keeping line graphs readable in black & white and for
-  colorblind readers.
-- **[`theme_cleanplots()`](https://tdmize.github.io/cleanplots/reference/theme_cleanplots.md)**
-  – Applies the cleanplots look to a single plot: white background,
-  dotted gridlines, gray axis lines, frameless legend at the right, and
-  outlined facet strips.
-- **[`cleanplots_save()`](https://tdmize.github.io/cleanplots/reference/cleanplots_save.md)**
-  – Saves a figure at a fixed, publication-ready size (7 x 5 inches, 300
-  dpi) so plots look the same regardless of your plot window. Format
-  follows the file extension.
-- **[`cleanplots_colors()`](https://tdmize.github.io/cleanplots/reference/cleanplots_colors.md)**
-  – Returns the palette’s hex codes, all or by name (e.g.,
-  `cleanplots_colors("red", "navy")`); add `bars = TRUE` for the soft
-  versions. Useful for coloring single elements manually.
-- **[`palette_cleanplots()`](https://tdmize.github.io/cleanplots/reference/palette_cleanplots.md)**
-  – The palette generator behind the color scales; rarely called
-  directly, but useful for feeding cleanplots colors into other
-  packages.
+  fit lines. You can change any of the sizes (e.g., `base_size = 16` for
+  presentations and lectures).
+- **[`scale_color_cleanplots()`](https://tdmize.github.io/cleanplots/reference/scale_color_cleanplots.md)**:
+  uses the cleanplots colors for a plot’s `color` and leaves everything
+  else alone. You can reorder (`order = c(7, 1, 2)`) or reverse the
+  colors.
+- **`scale_fill_cleanplots(palette = "bars")`**: uses the softer
+  cleanplots colors for a plot’s `fill`, made for bars, boxplots, and
+  areas. Use `palette = "default"` for the full-strength colors.
+- **[`scale_shape_cleanplots()`](https://tdmize.github.io/cleanplots/reference/scale_shape_cleanplots.md)**:
+  uses the cleanplots markers: hollow shapes for the dark colors and
+  solid shapes for the light colors, so groups can be told apart even
+  without color.
+- **[`scale_linetype_cleanplots()`](https://tdmize.github.io/cleanplots/reference/scale_shape_cleanplots.md)**:
+  uses the cleanplots line patterns in pairs (solid, solid, longdash,
+  longdash, twodash, twodash, dashed, dashed, dotdash, dotdash), so line
+  graphs stay readable in black and white and for colorblind readers.
+- **[`theme_cleanplots()`](https://tdmize.github.io/cleanplots/reference/theme_cleanplots.md)**:
+  gives a single plot the cleanplots look: white background, dotted
+  gridlines, gray axis lines, a legend at the right with no frame, and
+  outlined facet labels.
+- **[`cleanplots_save()`](https://tdmize.github.io/cleanplots/reference/cleanplots_save.md)**:
+  saves a figure at a fixed size (7 x 5 inches, 300 dpi), so it looks
+  the same no matter how big your plot window is. The file extension
+  sets the format.
+- **[`cleanplots_colors()`](https://tdmize.github.io/cleanplots/reference/cleanplots_colors.md)**:
+  gives the hex codes for all the colors or for specific ones by name
+  (e.g., `cleanplots_colors("red", "navy")`). Add `bars = TRUE` for the
+  softer versions. Handy for coloring single elements by hand.
+- **[`palette_cleanplots()`](https://tdmize.github.io/cleanplots/reference/palette_cleanplots.md)**:
+  the palette behind the color scales. You rarely need it directly, but
+  it is useful for passing the cleanplots colors to other packages.
 
 ``` r
 
@@ -65,12 +61,11 @@ library(cleanplots)
 
 ## 1. Colors only
 
-If all you want is the cleanplots colors – leaving the theme, sizes, and
-everything else exactly as they were – add
+If you only want the cleanplots colors and nothing else, add
 [`scale_color_cleanplots()`](https://tdmize.github.io/cleanplots/reference/scale_color_cleanplots.md)
 (or
 [`scale_fill_cleanplots()`](https://tdmize.github.io/cleanplots/reference/scale_color_cleanplots.md))
-to a plot, just like any other palette package:
+to a plot, like any other palette:
 
 ``` r
 
@@ -82,23 +77,23 @@ ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) +
 
 ![](cleanplots_files/figure-html/colors-only-1.png)
 
-One recommendation: if you are not using the full cleanplots setup
+If you don’t use the full setup
 ([`theme_cleanplots()`](https://tdmize.github.io/cleanplots/reference/theme_cleanplots.md)
 or
 [`cleanplots_defaults()`](https://tdmize.github.io/cleanplots/reference/cleanplots_defaults.md),
-below), add
+below), I recommend adding
 [`theme_minimal()`](https://ggplot2.tidyverse.org/reference/ggtheme.html)
-to your plots – the colors and markers are much easier to see against a
-white background than against ggplot2’s default gray. The examples in
-this vignette do this.
+to your plots: the colors and markers are much easier to see on a white
+background than on ggplot2’s default gray. The examples on this page do
+this.
 
 Both scales take the same options:
 
 - `palette`: `"default"` (the main colors) or `"bars"` (softer versions
-  for bars, areas, and pies – more on this below)
-- `order`: use the colors in a different order, e.g.
+  for bars, areas, and pie charts; more on this below)
+- `order`: use the colors in a different order; e.g.,
   `order = c(7, 1, 2)` starts with navy
-- `reverse`: reverse the palette
+- `reverse`: reverse the order of the colors
 
 ``` r
 
@@ -110,9 +105,9 @@ ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) +
 
 ![](cleanplots_files/figure-html/colors-order-1.png)
 
-To use individual colors manually,
+To use individual colors by hand,
 [`cleanplots_colors()`](https://tdmize.github.io/cleanplots/reference/cleanplots_colors.md)
-returns hex codes by name:
+gives their hex codes by name:
 
 ``` r
 
@@ -128,16 +123,15 @@ cleanplots_colors("red", "navy")
 
 ## 2. The two palettes
 
-The **main palette** is used for markers, lines, and confidence
-intervals. It alternates darker and lighter colors so that the first
-several groups remain distinguishable even when printed in black &
-white, and it contains no red–green pair (red-green colorblindness is
-the most common form, affecting roughly 8% of men).
+The **main colors** are for markers, lines, and confidence intervals.
+They alternate between darker and lighter, so the first several groups
+can still be told apart when printed in black and white. There is no
+red-green pair (red-green color blindness is the most common type,
+affecting about 8% of men).
 
-The **bar palette** contains softer versions of the same colors. Bars,
-areas, and pie slices use far more ink than points and lines, so
-full-strength colors overwhelm; cleanplots uses gentler fills for these
-elements:
+The **bar colors** are softer versions of the same colors. Bars, areas,
+and pie slices use much more ink than points and lines, so full-strength
+colors can overwhelm a figure. cleanplots uses lighter fills for these:
 
 ``` r
 
@@ -154,15 +148,14 @@ ggplot(titanic, aes(Sex, Freq, fill = Class)) +
 
 ### Ordinal categories: use viridis
 
-The cleanplots palettes are for **nominal** (unordered) groups. For
-**ordinal** or ordered categories – Likert responses, education levels,
-dose groups – use a palette where lightness changes with the ordering
-(here, darker = higher), so the order itself survives colorblindness and
-black & white printing. We recommend **cividis** (Nunez, Anderton, &
-Renslow 2018), a variant of viridis (van der Walt & Smith 2015)
-optimized so that readers with red-green colorblindness see essentially
-the same palette as everyone else. It is built into ggplot2 (no extra
-package needed) and combines cleanly with all other cleanplots features:
+The cleanplots colors are for **nominal** (unordered) groups. For
+**ordinal** categories, such as Likert responses or education levels,
+use colors that get darker (or lighter) in order, so the order is still
+clear to colorblind readers and in black and white. I recommend
+**cividis** (Nunez, Anderton, & Renslow 2018), a version of viridis (van
+der Walt & Smith 2015) designed so that readers with red-green color
+blindness see essentially the same colors as everyone else. It is built
+into ggplot2 and works with all the other cleanplots features:
 
 ``` r
 
@@ -175,21 +168,18 @@ ggplot(diamonds, aes(price, color = cut)) +
 
 ![](cleanplots_files/figure-html/ordinal-1.png)
 
-Two notes. First, `end = 0.95` trims the palette’s lightest extreme so
-it remains visible against a white background (use `begin = 0.05`
-instead if the dark end sits on a dark fill). Second, the cividis colors
-can be combined with the cleanplots shapes and/or linetype scales to
-ensure maximum ability to distinguish between different aspects of the
-graph. And if you have run
+A few notes. `end = 0.95` trims the lightest color so it stays visible
+on a white background (use `begin = 0.05` instead if the darkest color
+would sit on a dark fill). You can combine the cividis colors with the
+cleanplots shapes and line patterns to make groups even easier to tell
+apart. And if you have run
 [`cleanplots_defaults()`](https://tdmize.github.io/cleanplots/reference/cleanplots_defaults.md),
-adding a viridis-family scale overrides the automatic cleanplots colors
-for that plot only – the theme, sizes, and everything else stay in
-place.
+adding a viridis scale changes the colors for that plot only; the theme,
+sizes, and everything else stay the same.
 
 These are the same colors used by the ordinal cleanplots schemes for
 Stata (`cleanplots3`, `cleanplots5`, `cleanplots7`, `cleanplots9`,
-`cleanplots11`), so ordinal figures also match exactly across the two
-languages.
+`cleanplots11`), so ordinal figures match exactly across R and Stata.
 
 Nunez, J. R., Anderton, C. R., & Renslow, R. S. (2018). Optimizing
 colormaps with consideration for color vision deficiency to enable
@@ -197,25 +187,25 @@ accurate interpretation of scientific data. *PLOS ONE*, 13(7), e0199239.
 
 ## 3. Shapes and line patterns
 
-Color alone reliably distinguishes about 4–5 groups. Beyond that – and
-for black & white printing and colorblind readers – cleanplots varies
-**multiple visual channels at once**, so that no group pair ever depends
-on a single cue:
+Color alone can reliably tell apart about four or five groups. To go
+beyond that, and to help colorblind readers and black-and-white
+printing, cleanplots varies **several things at once**, so no two groups
+ever depend on a single cue:
 
-- **Color and lightness**: the palette alternates dark and light.
+- **Color and lightness**: the colors alternate between dark and light.
 - **Marker shape and fill**:
   [`scale_shape_cleanplots()`](https://tdmize.github.io/cleanplots/reference/scale_shape_cleanplots.md)
   gives hollow shapes (circle, square, triangle, diamond) to the dark
   colors and solid shapes to the light colors.
 - **Line pattern**:
   [`scale_linetype_cleanplots()`](https://tdmize.github.io/cleanplots/reference/scale_shape_cleanplots.md)
-  assigns patterns in pairs, ordered from closest to solid to furthest:
-  solid, solid, longdash, longdash, twodash, twodash, dashed, dashed,
-  dotdash, dotdash.
+  assigns patterns in pairs, from closest to solid to furthest: solid,
+  solid, longdash, longdash, twodash, twodash, dashed, dashed, dotdash,
+  dotdash.
 
-The assignments are coordinated: any two groups that share a shape or a
-line pattern always differ strongly in lightness, so every pair of
-groups is separated by at least two independent channels.
+These work together: any two groups that share a shape or line pattern
+always differ a lot in lightness, so every pair of groups differs in at
+least two ways.
 
 ``` r
 
@@ -248,9 +238,10 @@ ggplot(tx, aes(year, median / 1000, color = city, linetype = city)) +
 ## 4. The theme
 
 [`theme_cleanplots()`](https://tdmize.github.io/cleanplots/reference/theme_cleanplots.md)
-applies the cleanplots layout: white background, no plot border, light
-gray axis lines, dotted gridlines, a frameless legend at the right, and
-black-outlined facet strips. Like any ggplot2 theme, add it per plot:
+gives the cleanplots layout: a white background, no plot border, light
+gray axis lines, dotted gridlines, a legend at the right with no frame,
+and facet labels in black-outlined boxes. Like any ggplot2 theme, add it
+to a plot:
 
 ``` r
 
@@ -266,23 +257,21 @@ ggplot(mpg, aes(displ, hwy, color = class, shape = class)) +
 ## 5. The full setup: `cleanplots_defaults()`
 
 Adding scales and themes to every plot gets repetitive. One call at the
-top of your script applies the complete cleanplots setup for the
-session:
+top of your script sets up cleanplots for the whole session:
 
 ``` r
 
 cleanplots_defaults()
 ```
 
-After this, with **no scales or theme added**:
+After this, **without adding any scales or theme**:
 
 - every plot uses
   [`theme_cleanplots()`](https://tdmize.github.io/cleanplots/reference/theme_cleanplots.md);
-- discrete `color` aesthetics use the main palette, and discrete `fill`
-  aesthetics use the softer bar palette (bars and areas automatically
-  get the gentler colors);
-- points have heavier outlines (`size = 1.4`, `stroke = 0.7`), so the
-  hollow marker shapes are clearly visible;
+- `color` uses the main colors and `fill` uses the softer bar colors (so
+  bars and areas automatically get the lighter colors);
+- points are larger with heavier outlines (`size = 1.4`,
+  `stroke = 0.7`), so the hollow markers are easy to see;
 - lines are thicker (`linewidth = 0.65`) for
   [`geom_line()`](https://ggplot2.tidyverse.org/reference/geom_path.html),
   [`geom_path()`](https://ggplot2.tidyverse.org/reference/geom_path.html),
@@ -291,10 +280,10 @@ After this, with **no scales or theme added**:
   [`geom_function()`](https://ggplot2.tidyverse.org/reference/geom_function.html),
   and
   [`geom_smooth()`](https://ggplot2.tidyverse.org/reference/geom_smooth.html);
-  error bars, linereanges, and pointranges use 80% of that;
+  error bars, line ranges, and point ranges use 80% of that;
 - [`geom_smooth()`](https://ggplot2.tidyverse.org/reference/geom_smooth.html)
-  fit lines are cleanplots red with a light gray confidence band,
-  instead of ggplot2’s blue.
+  fit lines are cleanplots red with a light gray confidence band instead
+  of ggplot2’s blue.
 
 ``` r
 
@@ -314,7 +303,7 @@ ggplot(mpg, aes(displ, hwy)) +
 
 ![](cleanplots_files/figure-html/defaults-smooth-1.png)
 
-All settings are arguments if you prefer different sizes:
+You can change any of these sizes:
 
 ``` r
 
@@ -323,33 +312,32 @@ cleanplots_defaults(base_size = 12, point_size = 1.4,
                     smooth_color = "#D50000")
 ```
 
-The default text size (12) is chosen to match the body text of an
-academic article when the figure is saved at the recommended size (see
-the next section): if you can read the article, you can read the graph.
-For contexts that need bigger text – presentations and lectures
-especially – increase it:
+The default text size (12) matches the body text of an academic article
+when the figure is saved at the recommended size (see the next section):
+if you can read the article, you can read the graph. For presentations
+and lectures, make it bigger:
 
 ``` r
 
 cleanplots_defaults(base_size = 16)   # presentations and lectures
 ```
 
-One important exception: ggplot2 only provides session-default hooks for
-`color` and `fill` scales, so **shape and linetype scales cannot be
-applied automatically** – there is no equivalent mechanism for them.
-Whenever you map `shape` or `linetype` to a variable, add
+One important exception: ggplot2 only lets you set session defaults for
+`color` and `fill`, so **shapes and line patterns can’t be applied
+automatically**. Whenever you map `shape` or `linetype` to a variable,
+add
 [`scale_shape_cleanplots()`](https://tdmize.github.io/cleanplots/reference/scale_shape_cleanplots.md)
 or
 [`scale_linetype_cleanplots()`](https://tdmize.github.io/cleanplots/reference/scale_shape_cleanplots.md)
-to that plot. This matters in particular for 7+ groups: ggplot2’s
-built-in shape scale handles a maximum of 6 shapes and silently drops
-the markers for additional groups, while
+to that plot. This matters most with seven or more groups: ggplot2’s
+built-in shapes stop at six and silently drop the markers for any other
+groups, while
 [`scale_shape_cleanplots()`](https://tdmize.github.io/cleanplots/reference/scale_shape_cleanplots.md)
-provides 10.
+has ten.
 
-Everything remains overridable per plot: an explicit scale, theme, or
-aesthetic always wins. For example, to use the main palette for a fill
-instead of the automatic bar palette:
+You can still change anything on a single plot: a scale, theme, or
+setting you add to a plot always wins. For example, to use the main
+colors for a fill instead of the automatic bar colors:
 
 ``` r
 
@@ -361,10 +349,9 @@ ggplot(titanic, aes(Sex, Freq, fill = Class)) +
 
 ![](cleanplots_files/figure-html/override-1.png)
 
-**To restore ggplot2’s defaults**:
+**To go back to ggplot2’s defaults**:
 [`cleanplots_defaults()`](https://tdmize.github.io/cleanplots/reference/cleanplots_defaults.md)
-sets session-wide state, which persists until you restart R. To reset
-manually:
+lasts until you restart R. To reset it without restarting:
 
 ``` r
 
@@ -375,16 +362,16 @@ update_geom_defaults("point", list(size = 1.5, stroke = 0.5))
 
 ## 6. Saving figures
 
-An important quirk of ggplot2: a plot has no intrinsic size. Text,
-markers, and lines are physical units (points and millimeters), and
-[`ggsave()`](https://ggplot2.tidyverse.org/reference/ggsave.html)
+An important quirk of ggplot2 is that a plot has no built-in size. Text,
+markers, and lines are set in physical units (points and millimeters),
+and [`ggsave()`](https://ggplot2.tidyverse.org/reference/ggsave.html)
 **without explicit dimensions saves at whatever size your plot window
-happens to be** – so the same code produces figures with different
-proportions on different days, machines, and window layouts.
+happens to be**. So the same code can produce figures with different
+proportions on different days and computers.
 
-The fix is to always save at explicit dimensions.
+The fix is to always save at a set size.
 [`cleanplots_save()`](https://tdmize.github.io/cleanplots/reference/cleanplots_save.md)
-does this with tuned defaults – 7 x 5 inches at 300 dpi:
+does this for you, at 7 x 5 inches and 300 dpi:
 
 ``` r
 
@@ -394,25 +381,25 @@ cleanplots_save("my-figure.png", p)
 
 Why 7 x 5? It matches the default figure size of R Markdown (HTML)
 documents, and a 7-inch figure placed at the 6.5-inch text width of a
-US-letter manuscript scales the 12-point default text to about 11 points
-– comparable to the article’s body text. The file extension sets the
-format, so `.pdf`, `.tiff`, or `.eps` for journal submission systems
-work directly. Override any default as needed:
+US-letter manuscript shrinks the 12-point default text to about 11
+points, close to the article’s body text. The file extension sets the
+format, so `.pdf`, `.tiff`, or `.eps` files for journal submissions work
+directly. You can change any of the defaults:
 
 ``` r
 
 cleanplots_save("slide-figure.png", p, width = 10, height = 5.6)
 ```
 
-The same principle applies to other ways of saving:
+The same idea applies to other ways of saving:
 
 - **[`ggsave()`](https://ggplot2.tidyverse.org/reference/ggsave.html)
   directly**: always pass `width`, `height`, and `dpi`.
 - **RStudio’s Export button**: type explicit dimensions in the dialog
   (e.g., 2100 x 1500 pixels = 7 x 5 inches at 300 dpi) rather than
   accepting the window size.
-- **R Markdown / Quarto**: figures are sized by chunk options, which is
-  already fixed-size by construction. To match
+- **R Markdown / Quarto**: figures are sized by chunk options, so they
+  already have a set size. To match
   [`cleanplots_save()`](https://tdmize.github.io/cleanplots/reference/cleanplots_save.md):
   `knitr::opts_chunk$set(fig.width = 7, fig.height = 5)` (or
   `fig-width`/`fig-height` in Quarto). Note that `pdf_document` defaults
@@ -421,16 +408,16 @@ The same principle applies to other ways of saving:
   `print(p)` … [`dev.off()`](https://rdrr.io/r/grDevices/dev.html)):
   pass dimensions to the device call.
 
-Avoid copy-pasting figures from the plot window into Word or PowerPoint:
-the result is window-sized and screen-resolution.
+Avoid copying and pasting figures from the plot window into Word or
+PowerPoint: the result is sized to your window and at screen resolution.
 
 ## 7. Plots of predictions and marginal effects
 
-cleanplots works out of the box with the
-[marginaleffects](https://marginaleffects.com) and
-[modelsummary](https://modelsummary.com) packages. With
-[`cleanplots_defaults()`](https://tdmize.github.io/cleanplots/reference/cleanplots_defaults.md)
-set, their plots pick up the colors and theme automatically.
+cleanplots works with the [marginaleffects](https://marginaleffects.com)
+and [modelsummary](https://modelsummary.com) packages without any extra
+steps. After
+[`cleanplots_defaults()`](https://tdmize.github.io/cleanplots/reference/cleanplots_defaults.md),
+their plots use the cleanplots colors and theme automatically.
 
 The examples below use data on life satisfaction across ages:
 
@@ -470,11 +457,11 @@ marginaleffects::plot_predictions(mod, condition = c("educ", "married")) +
 
 ![](cleanplots_files/figure-html/preds-nominal-1.png)
 
-Predictions across a continuous predictor by group. One note here:
-`plot_predictions()` draws its confidence-interval ribbons with heavy
-transparency (alpha = 0.1), which is tuned for saturated colors. Add
-`scale_fill_cleanplots(palette = "default")` so the ribbons use the
-full-strength palette rather than the soft bar colors:
+Predictions across a continuous predictor by group. One note:
+`plot_predictions()` draws its confidence intervals with very light
+shading (alpha = 0.1), which is meant for strong colors. Add
+`scale_fill_cleanplots(palette = "default")` so the intervals use the
+full-strength colors rather than the softer bar colors:
 
 ``` r
 
@@ -485,9 +472,9 @@ marginaleffects::plot_predictions(mod, condition = c("age", "married")) +
 
 ![](cleanplots_files/figure-html/preds-continuous-1.png)
 
-For full control of the ribbons (or anything else), use
-`plot_predictions(..., draw = FALSE)` to get the plotting data and build
-the figure yourself:
+For full control of the intervals (or anything else), use
+`plot_predictions(..., draw = FALSE)` to get the data and build the
+figure yourself:
 
 ``` r
 
@@ -503,8 +490,8 @@ ggplot(pr, aes(age, estimate, color = married, fill = married)) +
 
 ![](cleanplots_files/figure-html/preds-draw-false-1.png)
 
-And comparisons – here, the marriage gap in life satisfaction across
-ages – with
+And comparisons (here, the marriage gap in life satisfaction across
+ages) with
 [`marginaleffects::plot_comparisons()`](https://rdrr.io/pkg/marginaleffects/man/plot_comparisons.html):
 
 ``` r
@@ -519,10 +506,10 @@ marginaleffects::plot_comparisons(mod, variables = "married",
 
 ## 8. For Stata users
 
-A companion cleanplots scheme for Stata shares this package’s colors,
-marker symbols, line patterns, and layout – the hex values in both
-languages are computed from the same definitions, so colors match
-exactly. The mapping:
+The cleanplots scheme for Stata has the same colors, marker symbols,
+line patterns, and layout as this package. The colors in both are
+computed from the same definitions, so they match exactly. How the
+pieces line up:
 
 | Stata | R |
 |----|----|
@@ -534,5 +521,5 @@ exactly. The mapping:
 | scheme layout settings | [`theme_cleanplots()`](https://tdmize.github.io/cleanplots/reference/theme_cleanplots.md) |
 | graph export sizing | [`cleanplots_save()`](https://tdmize.github.io/cleanplots/reference/cleanplots_save.md) |
 
-The Stata scheme is available at
+The Stata scheme is on my website at
 <https://www.trentonmize.com/software/cleanplots>.

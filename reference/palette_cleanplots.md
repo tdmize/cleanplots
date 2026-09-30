@@ -1,7 +1,7 @@
 # cleanplots color palette
 
-Generate a palette function for the cleanplots color scheme. This
-function is usually not called directly, but from within
+Creates the palette function behind the cleanplots color scales. You
+usually don't need to call it directly; it is used by
 [`scale_color_cleanplots()`](https://tdmize.github.io/cleanplots/reference/scale_color_cleanplots.md).
 
 ## Usage

@@ -1,14 +1,14 @@
 # cleanplots for R
 
-Publication-ready defaults for **ggplot2**: the
-[cleanplots](https://www.trentonmize.com/software/cleanplots) graphing
-scheme. cleanplots provides professional-looking figures with strong
-data visualization and accessibility defaults – colors are chosen to be
-**colorblind-friendly** and to remain **distinguishable when printed in
-black & white**, with matching marker shapes and line patterns so that
-groups stay distinct across multiple visual channels. A companion scheme
-is available for Stata, so figures made in R and Stata share the same
-design.
+cleanplots is a graphics scheme for **ggplot2** that makes clean,
+professional-looking figures by default. It is the R version of my
+[cleanplots scheme for
+Stata](https://www.trentonmize.com/software/cleanplots), so figures made
+in R and Stata look the same.
+
+The colors are **colorblind-friendly** and stay **distinguishable when
+printed in black and white**. Groups also get matching marker shapes and
+line patterns, so readers can tell them apart even without color.
 
 ## Installation
 
@@ -20,10 +20,12 @@ remotes::install_github("tdmize/cleanplots")
 
 ## Usage
 
-The quickest way to use cleanplots is one setup call: it sets the theme,
-makes markers and lines larger and more visible, and applies the
-cleanplots colors to all plots by default (main palette for `color`,
-softer bar palette for `fill`):
+The easiest way to use cleanplots is to run
+[`cleanplots_defaults()`](https://tdmize.github.io/cleanplots/reference/cleanplots_defaults.md)
+once at the top of your script. It sets the theme, makes markers and
+lines larger and easier to see, and applies the cleanplots colors to
+every plot (the main colors for `color` and the softer bar colors for
+`fill`):
 
 ``` r
 
@@ -38,13 +40,12 @@ ggplot(mpg, aes(displ, hwy, color = class, shape = class)) +
 cleanplots_save("my-figure.png")   # saves at a fixed 7 x 5 in, 300 dpi
 ```
 
-Or apply the pieces individually per plot. (If you are not using the
-full cleanplots setup, we recommend adding
+You can also add the pieces to individual plots instead. If you don’t
+use the full setup, I recommend adding
 [`theme_minimal()`](https://ggplot2.tidyverse.org/reference/ggtheme.html)
 or
-[`theme_cleanplots()`](https://tdmize.github.io/cleanplots/reference/theme_cleanplots.md)
-– the colors and markers are much easier to see against a white
-background.)
+[`theme_cleanplots()`](https://tdmize.github.io/cleanplots/reference/theme_cleanplots.md):
+the colors and markers are much easier to see on a white background.
 
 ``` r
 
@@ -78,7 +79,7 @@ cleanplots_colors(bars = TRUE)
 
 ## The palettes
 
-**Main colors** (`palette = "default"`) – used for markers, lines, and
+**Main colors** (`palette = "default"`) are for markers, lines, and
 confidence intervals:
 
 | \#  | Name     | Hex       | Definition     |
@@ -94,9 +95,9 @@ confidence intervals:
 | 9   | dkgray   | `#404040` | `gs4`          |
 | 10  | lavender | `#D9D7F0` | `lavender*.35` |
 
-**Bar/area colors** (`palette = "bars"`) – softer versions used for bar
-charts, area plots, and pie charts, which use far more ink than points
-and lines:
+**Bar colors** (`palette = "bars"`) are softer versions for bar charts,
+area plots, and pie charts, which use much more ink than points and
+lines:
 
 | \#  | Name     | Hex       | Definition          |
 |-----|----------|-----------|---------------------|
@@ -113,19 +114,20 @@ and lines:
 
 ## Shapes and line patterns
 
-Color alone reliably distinguishes about 4-5 groups. Beyond that – and
-for black & white printing and colorblind readers – cleanplots varies
-several visual channels at once:
-[`scale_shape_cleanplots()`](https://tdmize.github.io/cleanplots/reference/scale_shape_cleanplots.md)
-assigns hollow marker shapes to the dark colors and solid shapes to the
-light colors, and
-[`scale_linetype_cleanplots()`](https://tdmize.github.io/cleanplots/reference/scale_shape_cleanplots.md)
-assigns line patterns in pairs, ordered from closest to solid to
-furthest (solid, solid, longdash, longdash, twodash, twodash, dashed,
-dashed, dotdash, dotdash), so that any two groups sharing a shape or
-pattern always differ strongly in lightness. Groups remain
-distinguishable by color, by lightness, by marker shape and fill, and by
-line pattern.
+Color alone can reliably tell apart about four or five groups. To go
+beyond that, and to help readers who are colorblind or who print in
+black and white, cleanplots also varies marker shapes and line patterns:
+
+- [`scale_shape_cleanplots()`](https://tdmize.github.io/cleanplots/reference/scale_shape_cleanplots.md)
+  uses hollow markers for the dark colors and solid markers for the
+  light colors.
+- [`scale_linetype_cleanplots()`](https://tdmize.github.io/cleanplots/reference/scale_shape_cleanplots.md)
+  assigns line patterns in pairs, from closest to solid to furthest:
+  solid, solid, longdash, longdash, twodash, twodash, dashed, dashed,
+  dotdash, dotdash.
+
+Any two groups that share a shape or line pattern always differ a lot in
+lightness, so every group stays distinct.
 
 ``` r
 
@@ -138,20 +140,20 @@ ggplot(mpg, aes(displ, hwy, color = class, shape = class)) +
 
 ## Design goals
 
-The palette alternates dark and light colors so the first several groups
-are distinguishable by lightness alone when printed in black & white,
-contains no red-green pair, and passes deuteranopia, protanopia, and
-tritanopia simulation checks for the first five colors (minimum Delta-E
-of about 21). Check the palette yourself at [Coloring for
+The colors alternate between dark and light, so the first several groups
+can be told apart by lightness alone in black and white. There is no
+red-green pair, and the first five colors pass simulation checks for the
+three main types of color blindness. You can check the palette yourself
+at [Coloring for
 Colorblindness](https://davidmathlogic.com/colorblind/#%23D50000-%238FC6EB-%23000000-%23909090-%23740074-%23FFB3D9-%23143755-%23C0C0C0-%23404040-%23D9D7F0).
 
 ## The theme
 
-[`theme_cleanplots()`](https://tdmize.github.io/cleanplots/reference/theme_cleanplots.md):
-white background, no plot border, light gray axis lines and ticks,
-dotted light gray gridlines, a frameless, untitled legend at the right,
-and black-outlined facet strips with bold labels. To restore a legend
-title:
+[`theme_cleanplots()`](https://tdmize.github.io/cleanplots/reference/theme_cleanplots.md)
+gives a white background with no plot border, light gray axis lines and
+ticks, dotted light gray gridlines, a legend at the right with no frame
+or title, and bold facet labels in black-outlined boxes. To add the
+legend title back:
 
 ``` r
 
@@ -160,8 +162,13 @@ theme_cleanplots() + theme(legend.title = element_text())
 
 ## cleanplots for Stata
 
-The original Stata scheme is available at
-<https://www.trentonmize.com/software/cleanplots> or via
-`net install cleanplots, from("https://tdmize.github.io/data/cleanplots") replace`.
-Colors, marker symbols, line patterns, and layout match this package, so
-figures made in R and Stata look like siblings.
+The original Stata scheme is on my website at
+<https://www.trentonmize.com/software/cleanplots>. To install it in
+Stata:
+
+``` stata
+net install cleanplots, from("https://tdmize.github.io/data/cleanplots") replace
+```
+
+Its colors, marker symbols, line patterns, and layout match this
+package, so figures made in R and Stata look alike.
