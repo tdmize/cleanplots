@@ -27,9 +27,7 @@ cleanplots makes clean, professional-looking ggplot2 figures without any
 extra work on each plot. It gives you a color palette that is
 **colorblind-friendly** and stays **distinguishable when printed in black
 and white**, matching marker shapes and line patterns so groups stay
-distinct, a clean theme, and consistent figure sizes. My
-[cleanplots scheme for Stata](https://www.trentonmize.com/software/cleanplots)
-uses the same design, so figures made in R and Stata look alike.
+distinct, a clean theme, and consistent figure sizes.
 
 You can use as little or as much of cleanplots as you want. This page
 starts with the lightest touch (just the colors) and ends with the full
@@ -167,7 +165,7 @@ everything else stay the same.
 
 These are the same colors used by the ordinal cleanplots schemes for
 Stata (`cleanplots3`, `cleanplots5`, `cleanplots7`, `cleanplots9`,
-`cleanplots11`), so ordinal figures match exactly across R and Stata.
+`cleanplots11`).
 
 Nunez, J. R., Anderton, C. R., & Renslow, R. S. (2018). Optimizing
 colormaps with consideration for color vision deficiency to enable
@@ -434,10 +432,8 @@ marginaleffects::plot_comparisons(mod, variables = "married",
 
 ## 8. For Stata users
 
-The cleanplots scheme for Stata has the same colors, marker symbols,
-line patterns, and layout as this package. The colors in both are
-computed from the same definitions, so they match exactly. How the
-pieces line up:
+If you use the cleanplots scheme in Stata, here is how its settings
+correspond to this package:
 
 | Stata | R |
 |---|---|

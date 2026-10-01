@@ -34,5 +34,5 @@ reference:
 
 navbar:
   structure:
-    left: [intro, reference, news]
+    left: [intro, reference]
     right: [search, github]

@@ -6,8 +6,7 @@
 
 cleanplots is a graphics scheme for **ggplot2** that makes clean,
 professional-looking figures by default. It is the R version of my
-[cleanplots scheme for Stata](https://www.trentonmize.com/software/cleanplots),
-so figures made in R and Stata look the same.
+[cleanplots scheme for Stata](https://www.trentonmize.com/software/cleanplots).
 
 The colors are **colorblind-friendly** and stay **distinguishable when
 printed in black and white**. Groups also get matching marker shapes and
@@ -158,6 +157,3 @@ The original Stata scheme is on my website at
 ```stata
 net install cleanplots, from("https://tdmize.github.io/data/cleanplots") replace
 ```
-
-Its colors, marker symbols, line patterns, and layout match this package,
-so figures made in R and Stata look alike.
